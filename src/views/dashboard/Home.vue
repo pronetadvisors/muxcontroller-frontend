@@ -5,7 +5,7 @@
        <div class="flex">
          <img class="h-20 rounded-full" src="https://i0.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1" alt="Avatar">
          <div class="ml-4 mt-3">
-           <p class="text-zinc-200 text-2xl">Welcome back, Raaj Patel</p>
+           <p class="text-zinc-200 text-2xl">Welcome back, {{ FirstName }} {{ LastName }}</p>
            <p class="text-zinc-400 text-sm font-thin">Welcome back to the NOC4 Overview dashboard.</p>
          </div>
        </div>
@@ -106,8 +106,20 @@ import { faVideo, faFilm } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faClock } from '@fortawesome/free-regular-svg-icons';
 library.add(faVideo, faFilm, faEye, faClock);
 
+import { mapGetters } from 'vuex';
 export default {
-	name: "Home"
+	name: "Home",
+	data(){
+		return {
+
+		};
+	},
+	computed: {
+		...mapGetters('user', {
+			FirstName: 'getFirstName',
+			LastName: 'getLastName'
+		})
+	},
 };
 </script>
 

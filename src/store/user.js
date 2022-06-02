@@ -4,22 +4,29 @@ export default {
 	namespaced: true,
 	state: {
 		userQueryComplete: false,
+		isLoggedIn: false,
 		user: {
 			data: null,
-			isLoggedIn: false
-		}
+			user_id: null,
+			firstname: null,
+			lastname: null,
+			username: null,
+			email: null,
+			org_id: null,
+		},
+		token: null
 	},
 	actions: {
 		getUser: async ({commit, state}) => {
-			if(!state.user.isLoggedIn) {
-				const { data: user } = await Api.get('/user');
-				if(user.ret_det.code === 200) {
-					commit('setUser', user.data);
-					commit('setLoggedIn', true);
-				}
-				if(user.ret_det.code === 403) {
-					console.error(user.ret_det.message);
-				}
+			if(state.token != null) {
+				return Api.get('/user')
+					.then(response => {
+						commit('setUser', response.data);
+						commit('setLoggedIn', true);
+					})
+					.catch(() => {
+						console.log("Authorization error");
+					});
 			}
 			commit('setQuery', true);
 		},
@@ -33,19 +40,32 @@ export default {
 		}
 	},
 	mutations: {
+		setToken (state, token) {
+			state.token = token;
+		},
 		setUser (state, user) {
 			state.user.data = user;
+			state.user.user_id = user.user_id;
+			state.user.firstname = user.firstname;
+			state.user.lastname = user.lastname;
+			state.user.username = user.username;
+			state.user.email = user.email;
+			state.user.org_id = user.org_id;
 		},
 		setQuery (state, query) {
 			state.userQueryComplete = query;
 		},
 		setLoggedIn (state, loggedIn) {
-			state.user.isLoggedIn = loggedIn;
+			state.isLoggedIn = loggedIn;
 		},
 	},
 	getters: {
 		hasQueryCompleted: state => state.userQueryComplete,
+		isLoggedIn: state => state.isLoggedIn,
 		getUserData: state => state.user.data,
-		getUserId: state => state.user.data._id,
+		getUserId: state => state.user.data.user_id,
+		getToken: state => state.token,
+		getFirstName: state => state.user.firstname,
+		getLastName: state => state.user.lastname,
 	}
 };

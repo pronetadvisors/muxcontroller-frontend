@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { Api } from '../helpers/axios';
 
+import store from '../store';
+
 import Master from '../views/layout/Master.vue';
 
 const routes = [
@@ -15,6 +17,7 @@ const routes = [
 	{
 		path: '/dashboard',
 		component: Master,
+		meta: { loggedIn: true },
 		children: [
 			{
 				path: '',
@@ -42,10 +45,9 @@ router.beforeEach(async (to, from, next) => {
 		top: 0
 	});
 	if(to.meta.loggedIn) {
-		const {data: user} = await Api.get('/user');
-		if(user.ret_det.code === 200 && user.data.member === true) {
+		if(store.getters['user/isLoggedIn']){
 			next();
-		} else {
+		}else{
 			next('/');
 		}
 	}
