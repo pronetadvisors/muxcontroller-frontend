@@ -1,7 +1,7 @@
 <template>
  <div class="bg-zinc-600 pb-10">
-   <div class="grid grid-cols-6 gap-4">
-     <div class="flex justify-between col-start-2 col-span-4 mt-10 mb-10">
+   <div class="grid grid-cols-10 gap-4">
+     <div class="flex justify-between col-start-2 col-span-8 mt-10 mb-10">
        <div class="flex">
          <img class="h-20 rounded-full" src="https://i0.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1" alt="Avatar">
          <div class="ml-4 mt-3">
@@ -19,8 +19,8 @@
        </div>
      </div>
    </div>
-   <div class="grid grid-cols-6 gap-4">
-     <div class="col-start-2 col-span-4 grid grid-cols-2 gap-4">
+   <div class="grid grid-cols-10 gap-4">
+     <div class="col-start-2 col-span-8 grid grid-cols-2 gap-4">
        <div class="mx-auto mx-2 bg-zinc-700 rounded p-5">
          <p class="text-lg text-zinc-200 font-thin">Quick Stats</p>
          <div class="grid grid-cols-2 gap-4 mt-3">
