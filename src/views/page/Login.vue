@@ -33,56 +33,94 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 library.add(faEnvelope, faLock);
 
-import { mapMutations, mapActions } from 'vuex';
-import axios from 'axios';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+import axios from "axios";
 
-export default {
-	name: "Login",
-	data(){
-		return {
-			email: '',
-			password: '',
-			rememberme: false,
-		};
-	},
-	methods: {
-		...mapMutations('user', {
-			setToken: 'setToken'
-		}),
-		...mapActions('user', {
-			getUser: 'getUser'
-		}),
-		async onSubmit() {
-			let user = {
-				email: this.email,
-				password: this.password,
-				rememberme: this.rememberme,
-			};
+const store = useStore();
 
-			axios.post('http://localhost:3000/api/users/login', user)
-				.then(res => {
-					this.setToken(res.data.token);
-					this.getUser().then(() => {
-						this.$router.push('/dashboard');
-					});
-				})
-				.catch(() => {
-					console.log("User and Pass incorrect");
+const email = ref('');
+const password = ref('');
+const rememberme = ref(false);
+
+async function onSubmit() {
+	let user = {
+		email: email,
+		password: password,
+		rememberme: rememberme,
+	};
+
+	axios.post('http://localhost:3000/api/users/login', user)
+		.then(res => {
+			store.commit('user/setToken', res.data.token);
+			store.dispatch('user/getUser')
+				.then(() => {
+					this.$router.push('/dashboard');
 				});
-
-			this.email = "";
-			this.password = "";
-			this.rememberme = false;
-		}
-	}
-};
+		})
+		.catch(() => {
+			console.log("User and Pass incorrect");
+		});
+}
 </script>
+
+
+<!--<script>-->
+<!--import { library } from '@fortawesome/fontawesome-svg-core';-->
+<!--import { faEnvelope } from '@fortawesome/free-regular-svg-icons';-->
+<!--import { faLock } from '@fortawesome/free-solid-svg-icons';-->
+<!--library.add(faEnvelope, faLock);-->
+
+<!--import { mapMutations, mapActions } from 'vuex';-->
+<!--import axios from 'axios';-->
+
+<!--export default {-->
+<!--	name: "Login",-->
+<!--	data(){-->
+<!--		return {-->
+<!--			email: '',-->
+<!--			password: '',-->
+<!--			rememberme: false,-->
+<!--		};-->
+<!--	},-->
+<!--	methods: {-->
+<!--		...mapMutations('user', {-->
+<!--			setToken: 'setToken'-->
+<!--		}),-->
+<!--		...mapActions('user', {-->
+<!--			getUser: 'getUser'-->
+<!--		}),-->
+<!--		async onSubmit() {-->
+<!--			let user = {-->
+<!--				email: this.email,-->
+<!--				password: this.password,-->
+<!--				rememberme: this.rememberme,-->
+<!--			};-->
+
+<!--			axios.post('http://localhost:3000/api/users/login', user)-->
+<!--				.then(res => {-->
+<!--					this.setToken(res.data.token);-->
+<!--					this.getUser().then(() => {-->
+<!--						this.$router.push('/dashboard');-->
+<!--					});-->
+<!--				})-->
+<!--				.catch(() => {-->
+<!--					console.log("User and Pass incorrect");-->
+<!--				});-->
+
+<!--			this.email = "";-->
+<!--			this.password = "";-->
+<!--			this.rememberme = false;-->
+<!--		}-->
+<!--	}-->
+<!--};-->
+<!--</script>-->
 
 <style scoped>
 
