@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <router-view />
+  <div class="flex flex-col h-screen">
+    <router-view />
+  </div>
 </template>
 
 <style>

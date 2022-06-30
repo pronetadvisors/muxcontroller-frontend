@@ -24,8 +24,8 @@ const routes = [
 				component: () => import('@/views/dashboard/Index.vue')
 			},
 			{
-				path: ':catchAll(.*)',
-				component: () => import('@/views/page/404.vue')
+				path: 'streams',
+				component: () => import('@/views/dashboard/Streams.vue')
 			}
 		]
 	},

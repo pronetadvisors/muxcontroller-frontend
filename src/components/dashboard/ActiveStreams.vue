@@ -4,41 +4,25 @@
     <table class="table-auto bg-zinc-800 mt-3 rounded w-full">
       <thead>
         <tr class="text-zinc-300 text-md">
-          <th class="font-light">Preview</th>
-          <th class="font-light">Status</th>
-          <th class="font-light">Created At</th>
-          <th class="font-light">Stream ID</th>
-          <th class="font-light">Stream Key</th>
+          <th>Preview</th>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Img</td>
-          <td>Idle</td>
-          <td>9/12/2021</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Img</td>
-          <td>Idle</td>
-          <td>9/12/2021</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Img</td>
-          <td>Idle</td>
-          <td>9/12/2021</td>
-          <td></td>
-          <td></td>
+        <tr class="text-zinc-300 text-md text-center">
+          <td class="font-light"><img class="h-14 mx-auto py-1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"></td>
+          <td class="font-light">Idle</td>
+          <td class="font-light">Room 1</td>
+          <td class="font-light"></td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 
-<script script>
+<script>
 </script>
 
 <style scoped>
