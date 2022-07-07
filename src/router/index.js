@@ -4,6 +4,7 @@ import { useUserStore } from '@/stores/user.js';
 
 
 import Master from '@/views/layout/Master.vue';
+import MasterAdmin from '@/views/admin/layout/Master.vue';
 
 const routes = [
 	{
@@ -26,6 +27,17 @@ const routes = [
 			{
 				path: 'streams',
 				component: () => import('@/views/dashboard/Streams.vue')
+			}
+		]
+	},
+	{
+		path: '/admin/',
+		component: MasterAdmin,
+		meta : { isAdmin: true },
+		children: [
+			{
+				path: '',
+				component: () => import('@/views/admin/Index.vue')
 			}
 		]
 	},

@@ -6,33 +6,25 @@
           <div class="pt-2 mr-4 border border-t-0 border-l-0 border-b-0 border-r-1 border-zinc-600">
             <font-awesome-icon :icon="['fas', 'tv']" class="w-10 h-10 text-emerald-400 pr-4" />
           </div>
-          <p class="text-xl sm:text-3xl text-zinc-300 pt-3 sm:pt-2 mr-4">Overview</p>
+          <p class="text-xl sm:text-3xl text-zinc-300 pt-3 sm:pt-2 mr-4">Administration</p>
         </div>
 
         <div class="hidden lg:flex space-x-10 text-zinc-300 text-lg pt-1">
-          <router-link to="/dashboard" class="flex flex-col items-center">
+          <router-link to="/admin" class="flex flex-col items-center">
             <font-awesome-icon :icon="['fas', 'chart-line']" class="w-5 h-5 text-zinc-300" />
             <p>Overview</p>
           </router-link>
-          <router-link to="/dashboard/streams" class="flex flex-col items-center">
-            <font-awesome-icon :icon="['fas', 'video']" class="w-5 h-5 text-zinc-300" />
-            <p>Streams</p>
-          </router-link>
-          <router-link to="/dashboard/assets" class="flex flex-col items-center">
-            <font-awesome-icon :icon="['fas', 'film']" class="w-5 h-5 text-zinc-300" />
-            <p>Assets</p>
-          </router-link>
-          <router-link to="/dashboard/billing" class="flex flex-col items-center">
+          <router-link to="/admin/billing" class="flex flex-col items-center">
             <font-awesome-icon :icon="['fas', 'money-bill']" class="w-5 h-5 text-zinc-300" />
             <p>Billing</p>
           </router-link>
-          <router-link to="/dashboard/support" class="flex flex-col items-center">
+          <router-link to="/admin/support" class="flex flex-col items-center">
             <font-awesome-icon :icon="['fas', 'headset']" class="w-5 h-5 text-zinc-300" />
             <p>Support</p>
           </router-link>
-          <router-link to="/dashboard/organization" class="flex flex-col items-center">
+          <router-link to="/admin/organization" class="flex flex-col items-center">
             <font-awesome-icon :icon="['fas', 'user-group']" class="w-5 h-5 text-zinc-300" />
-            <p>Organization</p>
+            <p>Organizations</p>
           </router-link>
         </div>
 
@@ -54,12 +46,10 @@
       <!-- Mobile Nav Menu -->
       <div class="lg:hidden">
         <div class="rounded absolute flex-col items-center pt-3 pb-5 px-10 mt-4 space-y-6 font-bold text-lg bg-zinc-800 right-6 drop-shadow-md text-zinc-300" :class="{'flex': NavIsOpen, 'hidden': !NavIsOpen}">
-          <router-link to="/dashboard">Overview</router-link>
-          <router-link to="/dashboard/streams">Streams</router-link>
-          <router-link to="/dashboard/assets">Assets</router-link>
-          <router-link to="/dashboard/billing">Billing</router-link>
-          <router-link to="/dashboard/support">Support</router-link>
-          <router-link to="/dashboard/organization">Organization</router-link>
+          <router-link to="/admin">Overview</router-link>
+          <router-link to="/admin/billing">Billing</router-link>
+          <router-link to="/admin/support">Support</router-link>
+          <router-link to="/admin/organization">Organizations</router-link>
         </div>
       </div>
 
@@ -92,13 +82,6 @@
               <p class="font-thin text-xs pt-1 text-zinc-300">Account Settings</p>
             </div>
           </div>
-          <div class="flex px-5 py-3 border border-t-0 border-r-0 border-b-1 border-l-0 transition duration-200 border-zinc-600 hover:bg-zinc-700 text-zinc-300 hover:text-emerald-400">
-            <font-awesome-icon :icon="['fas', 'toolbox']" class="w-6 h-6 mt-2" />
-            <div class="ml-5">
-              <p class="font-light text-sm text-zinc-300">Administration</p>
-              <p class="font-thin text-xs pt-1 text-zinc-300">Global Settings</p>
-            </div>
-          </div>
           <button class="m-2 text-white bg-emerald-400 hover:bg-emerald-600 focus:ring-4 focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-emerald-400 dark:hover:bg-emerald-500 focus:outline-none hover:shadow-md hover:shadow-emerald-800 transition duration-200">
             <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" class="" />
             Logout
@@ -112,8 +95,8 @@
 <script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faTv, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, faUserGroup, faGear, faArrowRightFromBracket, faToolbox } from '@fortawesome/free-solid-svg-icons';
-library.add(faTv, faBell, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, faUserGroup, faUser, faGear, faArrowRightFromBracket, faToolbox);
+import { faTv, faChartLine, faMoneyBill, faHeadset, faUserGroup, faGear, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+library.add(faTv, faBell, faChartLine, faMoneyBill, faHeadset, faUserGroup, faUser, faGear, faArrowRightFromBracket);
 
 import { ref } from 'vue';
 
