@@ -45,6 +45,7 @@ library.add(faEnvelope, faLock);
 // MISC
 import { ref } from 'vue';
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 
 // STORES
 import { useUserStore } from '@/stores/user.js';
@@ -70,6 +71,10 @@ async function onSubmit() {
 			userStore.token = res.data.token;
 			userStore.getUser()
 				.then(() => {
+					notify({
+						type: 'success',
+						title: 'Welcome to NOC4!'
+					});
 					router.push('/dashboard');
 				});
 		})

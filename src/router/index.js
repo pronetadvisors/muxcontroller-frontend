@@ -38,6 +38,10 @@ const routes = [
 			{
 				path: '',
 				component: () => import('@/views/admin/Index.vue')
+			},
+			{
+				path: 'organizations',
+				component: () => import('@/views/admin/Organizations.vue')
 			}
 		]
 	},
