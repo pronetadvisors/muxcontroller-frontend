@@ -8,6 +8,10 @@ import MasterAdmin from '@/views/admin/layout/Master.vue';
 
 const routes = [
 	{
+		path: '/',
+		component: () => import('@/views/page/Index.vue')
+	},
+	{
 		path: '/login/',
 		component: () => import('@/views/page/Login.vue')
 	},

@@ -22,8 +22,9 @@
     </div>
   </div>
   <div class="col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4 grid grid-cols-3 gap-4">
-    <div class="col-span-2 bg-zinc-700 outline outline-1 outline-zinc-500 rounded p-4 flex">
-      Pending Tickets
+    <div class="col-span-2 bg-zinc-700 outline outline-1 outline-zinc-500 rounded p-4">
+      <h1 class="text-xl text-white">Tickets</h1>
+      <p class="text-3xl text-white">Coming Soon!</p>
     </div>
     <div class="bg-zinc-800 outline outline-1 outline-zinc-500 rounded">
       Quick Actions:

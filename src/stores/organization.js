@@ -5,14 +5,21 @@ import { notify } from "@kyvg/vue3-notification";
 export const useOrganizationStore = defineStore('organization', {
 	state: () => ({
 		organizations: [],
-		users: {}
+		users: {},
+		streams: {},
+		assets: {},
 	}),
 	persist: true,
 	getters: {
 		getOrganizations: state => state.organizations,
 		getUsers: state => state.users,
+		getStreams: state => state.streams,
+		getAssets: state => state.assets,
 	},
 	actions: {
+		async logout() {
+			this.$reset();
+		},
 		async createOrganization(organization){
 			Api.post('/organizations', organization)
 				.then(() => {
@@ -69,6 +76,10 @@ export const useOrganizationStore = defineStore('organization', {
 			Api.get('/organizations')
 				.then((res) => {
 					this.organizations = res.data.organization;
+					this.organizations.forEach((org) => {
+						this.getUsersInOrg(org.id);
+						this.getStreamsInOrg(org.id);
+					});
 				})
 				.catch((err) => {
 					notify({
@@ -91,5 +102,18 @@ export const useOrganizationStore = defineStore('organization', {
 					});
 				});
 		},
+		getStreamsInOrg(id){
+			Api.get(`/mux/streams/org/${id}`)
+				.then((res) => {
+					this.streams[id] = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		}
 	},
 });

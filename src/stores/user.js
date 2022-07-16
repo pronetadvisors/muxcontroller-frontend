@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { Api } from "../helpers/axios";
 import { notify } from "@kyvg/vue3-notification";
-
 export const useUserStore = defineStore('user', {
 	state: () => ({
 		userQueryComplete: false,
@@ -56,7 +55,6 @@ export const useUserStore = defineStore('user', {
 		},
 		async logout() {
 			this.$reset();
-
 			notify({
 				type: 'success',
 				title: "Logged Out",

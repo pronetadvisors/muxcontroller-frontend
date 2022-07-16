@@ -136,12 +136,15 @@ function UserMenu(){
 // STORES
 import { useUserStore } from '@/stores/user.js';
 const userStore = useUserStore();
+import { useOrganizationStore } from '@/stores/organization.js';
+const organizationStore = useOrganizationStore();
 
 // ROUTERS
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
 function onLogout(){
+	organizationStore.logout();
 	userStore.logout()
 		.then(() => {
 			router.push('/login');
