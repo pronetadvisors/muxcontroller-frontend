@@ -7,14 +7,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Header from '../partial/Header.vue';
-export default {
-	name: "Master",
-	components: {
-		Header
-	}
-};
+
+import { useOrganizationStore } from '@/stores/organization.js';
+const organizationStore = useOrganizationStore();
+
+organizationStore.getStreamsSelf();
+organizationStore.getAssetsSelf();
 </script>
 
 <style scoped>

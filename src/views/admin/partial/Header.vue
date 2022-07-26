@@ -10,21 +10,21 @@
         </div>
 
         <div class="hidden lg:flex space-x-10 text-zinc-300 text-lg pt-1">
-          <router-link to="/admin" class="flex flex-col items-center">
-            <font-awesome-icon :icon="['fas', 'chart-line']" class="w-5 h-5 text-zinc-300" />
-            <p>Overview</p>
+          <router-link to="/admin" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
+            <font-awesome-icon :icon="['fas', 'chart-line']" class="w-5 h-5" />
+            <p class="text-zinc-300">Overview</p>
           </router-link>
-          <router-link to="/admin/billing" class="flex flex-col items-center">
-            <font-awesome-icon :icon="['fas', 'money-bill']" class="w-5 h-5 text-zinc-300" />
-            <p>Billing</p>
+          <router-link to="/admin/billing" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
+            <font-awesome-icon :icon="['fas', 'money-bill']" class="w-5 h-5" />
+            <p class="text-zinc-300">Billing</p>
           </router-link>
-          <router-link to="/admin/support" class="flex flex-col items-center">
-            <font-awesome-icon :icon="['fas', 'headset']" class="w-5 h-5 text-zinc-300" />
-            <p>Support</p>
+          <router-link to="/admin/support" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
+            <font-awesome-icon :icon="['fas', 'headset']" class="w-5 h-5" />
+            <p class="text-zinc-300">Support</p>
           </router-link>
-          <router-link to="/admin/organizations" class="flex flex-col items-center">
-            <font-awesome-icon :icon="['fas', 'user-group']" class="w-5 h-5 text-zinc-300" />
-            <p>Organizations</p>
+          <router-link to="/admin/organizations" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
+            <font-awesome-icon :icon="['fas', 'user-group']" class="w-5 h-5" />
+            <p class="text-zinc-300">Organizations</p>
           </router-link>
         </div>
 
@@ -46,10 +46,10 @@
       <!-- Mobile Nav Menu -->
       <div class="lg:hidden">
         <div class="rounded absolute flex-col items-center pt-3 pb-5 px-10 mt-4 space-y-6 font-bold text-lg bg-zinc-800 right-6 drop-shadow-md text-zinc-300" :class="{'flex': NavIsOpen, 'hidden': !NavIsOpen}">
-          <router-link to="/admin">Overview</router-link>
-          <router-link to="/admin/billing">Billing</router-link>
-          <router-link to="/admin/support">Support</router-link>
-          <router-link to="/admin/organizations">Organizations</router-link>
+          <router-link to="/admin" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Overview</router-link>
+          <router-link to="/admin/billing" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Billing</router-link>
+          <router-link to="/admin/support" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Support</router-link>
+          <router-link to="/admin/organizations" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Organizations</router-link>
         </div>
       </div>
 
@@ -58,8 +58,8 @@
         <div class="rounded absolute flex-col w-60 mt-4 font-bold text-lg bg-zinc-900 right-6 drop-shadow-md text-zinc-300" :class="{'flex': UserIsOpen, 'hidden': !UserIsOpen}">
           <div class="bg-zinc-800 grid grid-rows-3 grid-flow-col gap-1 pt-5 pl-5 max-h-24">
             <img class="h-14 w-14 rounded-full row-span-3" :src="'http://localhost:3000'+ userStore.getAvatar" alt="Avatar">
-            <p class="font-extralight col-span-2">Raaj Patel</p>
-            <p class="font-thin text-sm row-span-2 col-span-2">CEAVCO</p>
+            <p class="font-extralight col-span-2">{{ userStore.getFirstName }} {{ userStore.getLastName }}</p>
+            <p class="font-thin text-sm row-span-2 col-span-2">Administrator</p>
           </div>
           <div class="sm:hidden flex px-5 py-3 border border-t-0 border-r-0 border-b-1 border-l-0 transition duration-200 border-zinc-600 hover:bg-zinc-700 text-zinc-300 hover:text-emerald-400">
             <font-awesome-icon :icon="['far', 'bell']" class="w-6 h-6 mt-2" />

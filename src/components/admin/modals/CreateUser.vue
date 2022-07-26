@@ -41,6 +41,10 @@
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
               <input type="email" v-model="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
             </div>
+            <div>
+              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+              <input type="password" v-model="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="**********" required>
+            </div>
             <button type="submit" value="submit" class="w-full text-white bg-emerald-500 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-emerald-800">Create User</button>
           </form>
         </div>
@@ -60,10 +64,14 @@ const firstname = ref('');
 const lastname = ref('');
 const username = ref('');
 const email = ref('');
+const password = ref('');
 
 // STORES
 import { useUserStore } from '@/stores/user.js';
 const userStore = useUserStore();
+
+import { useOrganizationStore } from '@/stores/organization.js';
+const organizationStore = useOrganizationStore();
 
 
 async function onSubmit() {
@@ -74,10 +82,13 @@ async function onSubmit() {
 		role: "2",
 		email: email.value,
 		organization_id: props.id,
-		password: "DefaultPassword"
+		password: password.value
 	};
 
-	await userStore.createUser(user);
+	userStore.createUser(user)
+		.then(() => {
+			organizationStore.getDBOrganizations();
+		});
 
 	isOpen.value = false;
 }

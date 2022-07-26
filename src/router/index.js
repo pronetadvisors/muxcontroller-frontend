@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { Api } from '@/helpers/axios';
 import { useUserStore } from '@/stores/user.js';
+import { useOrganizationStore } from '@/stores/organization.js';
 
 
 import Master from '@/views/layout/Master.vue';
 import MasterAdmin from '@/views/admin/layout/Master.vue';
+import {notify} from "@kyvg/vue3-notification";
 
 const routes = [
 	{
@@ -60,12 +62,20 @@ const router = createRouter({
 	routes
 });
 
-router.beforeEach(async (to) => {
+router.beforeEach(async (to, from) => {
 	const userStore = useUserStore();
+	const organizationStore = useOrganizationStore();
 	window.scrollTo({
 		top: 0
 	});
+	const date = new Date();
 	if(userStore.getLoggedIn){
+		if(userStore.getJwtExp < (Math.floor(date.getTime() / 1000))){
+			organizationStore.logout();
+			userStore.logout().then(() => {
+				router.push('/login');
+			});
+		}
 		if(to.path.includes('login') || to.path.includes('register')) {
 			return '/dashboard';
 		}
@@ -75,16 +85,16 @@ router.beforeEach(async (to) => {
 			return '/login';
 		}
 	}
-	// else if(to.meta.isAdmin) { // Route is an admin route.
-	// 	const {data: user} = await Api.get('/user');
-	// 	if(user.ret_det.code === 200 && user.data.isStaff === true) {
-	// 		next();
-	// 	} else {
-	// 		next('/');
-	// 	}
-	// } else {
-	// 	next();
-	// }
+	else if(to.meta.isAdmin) { // Route is an admin route.
+		const {data: user} = await Api.get('/user');
+		if(user.role < 4) {
+			notify({
+				title: 'Admin Only',
+				text: "You do not have permission to access this page!",
+			});
+			return from.path;
+		}
+	}
 });
 
 export default router;

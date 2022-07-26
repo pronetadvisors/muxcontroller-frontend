@@ -20,12 +20,12 @@
 
             <label class="block relative flex items-center text-zinc-300 focus-within:text-emerald-400 mt-2">
               <font-awesome-icon :icon="['fas', 'lock']" class="w-5 h-5 absolute ml-3 mt-1 pointer-events-none" />
-              <input type="text" placeholder="Password" v-model="password" class="pl-10 pr-3 mt-1 block w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-md text-sm text-zinc-300 shadow-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"/>
+              <input type="password" placeholder="Password" v-model="password" class="pl-10 pr-3 mt-1 block w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-md text-sm text-zinc-300 shadow-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"/>
             </label>
 
             <label class="block relative flex items-center text-zinc-300 focus-within:text-emerald-400 mt-2">
               <font-awesome-icon :icon="['fas', 'lock']" class="w-5 h-5 absolute ml-3 mt-1 pointer-events-none" />
-              <input type="text" placeholder="Repeat Password" v-model="password2" class="pl-10 pr-3 mt-1 block w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-md text-sm text-zinc-300 shadow-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"/>
+              <input type="password" placeholder="Repeat Password" v-model="password2" class="pl-10 pr-3 mt-1 block w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-md text-sm text-zinc-300 shadow-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"/>
             </label>
             <div class="form-check mt-3">
               <input v-model="promotional" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="RememberMe">
@@ -80,7 +80,7 @@ async function onSubmit() {
 			promotional: promotional.value
 		};
 
-		axios.post('http://localhost:3000/api/users/register', user)
+		axios.post('http://localhost:3000/api/users', user)
 			.then(res => {
 				userStore.token = res.data.token;
 				userStore.getUser()

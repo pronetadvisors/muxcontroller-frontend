@@ -69,13 +69,12 @@ async function onSubmit() {
 	axios.post('http://localhost:3000/api/users/login', user)
 		.then(res => {
 			userStore.token = res.data.token;
-			userStore.getUser()
+			userStore.getUser(true)
 				.then(() => {
 					notify({
 						type: 'success',
 						title: 'Welcome to NOC4!'
 					});
-					router.push('/dashboard');
 				});
 		})
 		.catch(() => {

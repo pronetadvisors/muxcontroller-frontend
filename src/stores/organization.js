@@ -17,7 +17,7 @@ export const useOrganizationStore = defineStore('organization', {
 		getAssets: state => state.assets,
 	},
 	actions: {
-		async logout() {
+		logout() {
 			this.$reset();
 		},
 		async createOrganization(organization){
@@ -79,6 +79,7 @@ export const useOrganizationStore = defineStore('organization', {
 					this.organizations.forEach((org) => {
 						this.getUsersInOrg(org.id);
 						this.getStreamsInOrg(org.id);
+						this.getAssetsInOrg(org.id);
 					});
 				})
 				.catch((err) => {
@@ -89,6 +90,7 @@ export const useOrganizationStore = defineStore('organization', {
 					});
 				});
 		},
+		// USED BY ADMINS
 		getUsersInOrg(id){
 			Api.get(`/users/${id}`)
 				.then((res) => {
@@ -106,6 +108,63 @@ export const useOrganizationStore = defineStore('organization', {
 			Api.get(`/mux/streams/org/${id}`)
 				.then((res) => {
 					this.streams[id] = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		getAssetsInOrg(id){
+			Api.get(`/mux/assets/org/${id}`)
+				.then((res) => {
+					this.assets[id] = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		// USED BY USERS
+		getStreamsSelf(){
+			Api.get(`/mux/streams/`)
+				.then((res) => {
+					this.streams = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		getAssetsSelf(){
+			Api.get(`/mux/assets/`)
+				.then((res) => {
+					this.assets = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		createStream(data){
+			Api.post(`/mux/streams`, data)
+				.then((res) => {
+					this.streams.push(res.data);
+					notify({
+						type: 'success',
+						title: 'Stream created successfully'
+					});
 				})
 				.catch((err) => {
 					notify({
