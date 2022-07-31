@@ -52,12 +52,10 @@
             </td>
             <td class="px-6 text-right">
               <stream-info :stream="stream" />
-              <a href="#">
-                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="w-4 h-4" />
-              </a>
-              <a href="#">
-                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="w-4 h-4" />
-              </a>
+<!--              <a href="#">-->
+<!--                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="w-4 h-4" />-->
+<!--              </a>-->
+              <delete-stream :id="stream.id" :streamname="stream.name" />
             </td>
           </tr>
         </tbody>
@@ -78,6 +76,7 @@ const organizationStore = useOrganizationStore();
 
 // COMPONENTS
 import CreateStream from '@/components/dashboard/modals/CreateStream.vue';
+import DeleteStream from '@/components/dashboard/modals/DeleteStream.vue';
 import StreamInfo from '@/components/dashboard/modals/StreamInfo.vue';
 import StreamCopyHtml from '@/components/dashboard/modals/StreamCopyHTML.vue';
 </script>

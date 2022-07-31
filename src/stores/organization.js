@@ -173,6 +173,23 @@ export const useOrganizationStore = defineStore('organization', {
 						text: err.response.data.msg
 					});
 				});
+		},
+		deleteStream(Stream_ID){
+			Api.delete(`/mux/streams/${Stream_ID}`)
+				.then(() => {
+					this.getStreamsSelf();
+					notify({
+						type: 'success',
+						title: 'Stream deleted successfully'
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
 		}
 	},
 });
