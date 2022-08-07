@@ -6,7 +6,7 @@
           <div class="pt-2 mr-4 border border-t-0 border-l-0 border-b-0 border-r-1 border-zinc-600">
             <font-awesome-icon :icon="['fas', 'tv']" class="w-10 h-10 text-emerald-400 pr-4" />
           </div>
-          <p class="text-xl sm:text-3xl text-zinc-300 pt-3 sm:pt-2 mr-4">Overview</p>
+          <p class="text-xl sm:text-3xl text-zinc-300 pt-3 sm:pt-2 mr-4">NOC4</p>
         </div>
 
         <div class="hidden lg:flex space-x-10 text-zinc-300 text-lg pt-1">

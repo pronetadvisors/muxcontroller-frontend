@@ -190,6 +190,40 @@ export const useOrganizationStore = defineStore('organization', {
 						text: err.response.data.msg
 					});
 				});
+		},
+		createAsset(data){
+			Api.post(`/mux/assets`, data)
+				.then((res) => {
+					this.assets.push(res.data);
+					notify({
+						type: 'success',
+						title: 'Asset created successfully'
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		deleteAsset(Asset_ID){
+			Api.delete(`/mux/assets/${Asset_ID}`)
+				.then(() => {
+					this.getAssetsSelf();
+					notify({
+						type: 'success',
+						title: 'Asset deleted successfully'
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
 		}
 	},
 });

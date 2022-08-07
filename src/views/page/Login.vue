@@ -2,7 +2,7 @@
   <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-zinc-800 py-6 sm:py-12">
     <p class="relative mx-auto text-3xl text-gray-300">Welcome Back.</p>
     <p class="relative mx-auto text-sm font-thin text-gray-400">Please sign in to your account</p>
-    <router-link to="/register" class="relative mx-auto text-sm font-thin p-3 text-emerald-400">I don't have an account yet</router-link>
+<!--    <router-link to="/register" class="relative mx-auto text-sm font-thin p-3 text-emerald-400">I don't have an account yet</router-link>-->
     <div class="container mx-auto content-center pl-2 pr-2">
       <div class="relative bg-zinc-900 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 mx-auto max-w-lg rounded-lg px-10">
         <div class="mx-auto max-w-md">

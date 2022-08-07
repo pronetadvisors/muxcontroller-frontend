@@ -33,6 +33,10 @@ const routes = [
 			{
 				path: 'streams',
 				component: () => import('@/views/dashboard/Streams.vue')
+			},
+			{
+				path: 'assets',
+				component: () => import('@/views/dashboard/Assets.vue')
 			}
 		]
 	},
@@ -74,6 +78,10 @@ router.beforeEach(async (to, from) => {
 			organizationStore.logout();
 			userStore.logout().then(() => {
 				router.push('/login');
+				notify({
+					title: 'Session Expired',
+					text: 'You have been logged out.'
+				});
 			});
 		}
 		if(to.path.includes('login') || to.path.includes('register')) {

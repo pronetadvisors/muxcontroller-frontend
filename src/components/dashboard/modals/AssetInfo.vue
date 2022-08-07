@@ -23,21 +23,13 @@
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Stream Info</h3>
           <form class="space-y-6">
             <div>
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Name</label>
-              <input type="text" disabled v-model="stream.name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-            </div>
-            <div>
-              <label for="StreamID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stream ID</label>
-              <input type="text" disabled v-model="stream.id" name="StreamID" id="StreamID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="--" required>
-            </div>
-            <div>
-              <label for="StreamKey" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Key</label>
-              <input type="text" disabled v-model="stream.stream_key" name="StreamKey" id="StreamKey" placeholder="12345678-abcd-1234-abcd-1234567890ab" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+              <label for="AssetID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stream ID</label>
+              <input type="text" disabled v-model="asset.id" name="AssetID" id="AssetID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="--" required>
             </div>
             <div class="flex">
               <div class="w-1/3 mr-1">
-                <label for="latency_mode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Latency Mode</label>
-                <input type="text" disabled v-model="stream.latency_mode" name="latency_mode" id="latency_mode" placeholder="--" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                <label for="aspect_ratio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Aspect Ratio</label>
+                <input type="text" disabled v-model="asset.aspect_ratio" name="aspect_ratio" id="aspect_ratio" placeholder="--" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
               </div>
               <div class="w-2/3 ml-1">
                 <label for="created_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Created At</label>
@@ -54,7 +46,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="pb in stream.playback_ids" :key="pb.id" class="border border-x-0 items-center justify-center">
+                  <tr v-for="pb in asset.playback_ids" :key="pb.id" class="border border-x-0 items-center justify-center">
                     <td>{{ pb.policy }}</td>
                     <td>
                       <button type="button" @click="copy(pb.id)" class="flex transition duration-200 hover:scale-125">
@@ -83,14 +75,14 @@ import { faClipboard } from '@fortawesome/free-regular-svg-icons';
 library.add(faCircleInfo, faClipboard);
 
 // PROPS
-const props = defineProps(['stream']);
+const props = defineProps(['asset']);
 
 
 //MISC
 import { ref } from 'vue';
-let stream = ref(props.stream);
+let asset = ref(props.asset);
 let date = ref(null);
-date.value = new Date(stream.value.created_at * 1000);
+date.value = new Date(asset.value.created_at * 1000);
 
 let isOpen = ref(false);
 
@@ -107,5 +99,6 @@ function copy(text) {
 		title: `Copied to clipboard`,
 	});
 }
+
 
 </script>

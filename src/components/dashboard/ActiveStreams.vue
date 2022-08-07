@@ -27,7 +27,6 @@
 import { useOrganizationStore } from '@/stores/organization.js';
 const organizationStore = useOrganizationStore();
 
-console.log(organizationStore.getStreams);
 </script>
 
 <style scoped>

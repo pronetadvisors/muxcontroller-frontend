@@ -3,7 +3,7 @@
     <div class="flex">
     </div>
     <div class="flex mt-4">
-      <create-stream />
+      <create-asset />
     </div>
   </div>
   <div class="col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4">
@@ -12,10 +12,10 @@
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-300">
         <tr>
           <th scope="col" class="px-6 py-3">
-            Name
+            Preview
           </th>
           <th scope="col" class="px-6 py-3">
-            Stream ID
+            Asset ID
           </th>
           <th scope="col" class="px-6 py-3">
             HTML
@@ -29,29 +29,26 @@
         </tr>
         </thead>
         <tbody>
-          <tr v-for="stream in organizationStore.getStreams" :key="stream.id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
-            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              {{ stream.name || 'N/A' }}
+          <tr v-for="asset in organizationStore.getAssets" :key="asset.id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
+            <td class="px-6 py-4">
+              Hover for Preview
             </td>
             <td class="px-6 py-4">
-              {{ stream.id}}
+              {{ asset.id }}
             </td>
             <td class="px-6 py-4">
-              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html :playback_id="stream.playback_ids[0].id" /></a>
+              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html :playback_id="asset.playback_ids[0].id" /></a>
             </td>
             <td class="px-6 py-4 flex items-center">
               <div
                   class="rounded-full w-2 h-2 ml-3 mr-1"
-                  :class="{ 'bg-green-500': stream.status === 'active', 'bg-blue-500': stream.status === 'idle', 'bg-amber-500': stream.status === 'disabled' }"
+                  :class="{ 'bg-green-500': asset.status === 'ready', 'bg-blue-500': asset.status === 'preparing', 'bg-amber-500': asset.status === 'errored' }"
               ></div>
-              {{ stream.status }}
+              {{ asset.status }}
             </td>
             <td class="px-6 text-right">
-              <stream-info :stream="stream" />
-<!--              <a href="#">-->
-<!--                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="w-4 h-4" />-->
-<!--              </a>-->
-              <delete-stream :id="stream.id" :streamname="stream.name" />
+              <asset-info :asset="asset" />
+              <delete-asset :id="asset.id" />
             </td>
           </tr>
         </tbody>
@@ -70,10 +67,12 @@ library.add(faMagnifyingGlass, faEllipsisVertical);
 import { useOrganizationStore } from '@/stores/organization.js';
 const organizationStore = useOrganizationStore();
 
+organizationStore.getAssetsSelf();
+
 // COMPONENTS
-import CreateStream from '@/components/dashboard/modals/CreateStream.vue';
-import DeleteStream from '@/components/dashboard/modals/DeleteStream.vue';
-import StreamInfo from '@/components/dashboard/modals/StreamInfo.vue';
+import CreateAsset from '@/components/dashboard/modals/CreateAsset.vue';
+import DeleteAsset from '@/components/dashboard/modals/DeleteAsset.vue';
+import AssetInfo from '@/components/dashboard/modals/AssetInfo.vue';
 import CopyHtml from '@/components/dashboard/modals/CopyHTML.vue';
 </script>
 
