@@ -94,14 +94,11 @@ date.value = new Date(stream.value.created_at * 1000);
 
 let isOpen = ref(false);
 
-// STORES
-import { useOrganizationStore } from '@/stores/organization.js';
-const organizationStore = useOrganizationStore();
 
 import { notify } from "@kyvg/vue3-notification";
 
 function copy(text) {
-	navigator.clipboard.writeText(text);
+	navigator.clipboard.writeText(`https://stream.mux.com/${text}.m3u8`);
 	notify({
 		type: 'success',
 		title: `Copied to clipboard`,

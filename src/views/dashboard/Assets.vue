@@ -31,13 +31,13 @@
         <tbody>
           <tr v-for="asset in organizationStore.getAssets" :key="asset.id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
             <td class="px-6 py-4">
-              Hover for Preview
+              Soon
             </td>
             <td class="px-6 py-4">
               {{ asset.id }}
             </td>
             <td class="px-6 py-4">
-              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html :playback_id="asset.playback_ids[0].id" /></a>
+              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html type="on-demand" name="Video" :playback_id="asset.playback_ids[0].id" /></a>
             </td>
             <td class="px-6 py-4 flex items-center">
               <div

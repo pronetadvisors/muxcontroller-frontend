@@ -20,12 +20,12 @@
    <ActiveStreams></ActiveStreams>
  </div>
   <div class="col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4 grid grid-cols-3 gap-4">
-    <div class="col-span-2 bg-gradient-to-r from-emerald-400 to-green-400 hover:from-green-400 hover:to-emerald-400 rounded m-2 p-4 flex">
+    <router-link to="/dashboard/NOC4" class="col-span-2 bg-gradient-to-r from-emerald-400 to-green-400 hover:from-green-400 hover:to-emerald-400 rounded m-2 p-4 flex transition duration-200 hover:scale-105">
       <p class="text-white text-2xl font-semibold">
         Enter the NOC4 Dashboard
       </p>
       <font-awesome-icon :icon="['fas', 'arrow-right-long']" class="ml-10 w-9 h-9 text-white" />
-    </div>
+    </router-link>
     <div class="bg-zinc-800 rounded m-2">
       Need Help?
     </div>

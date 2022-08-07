@@ -89,9 +89,6 @@ export const useUserStore = defineStore('user', {
 		async createUser(user){
 			Api.post('/users', user)
 				.then(() => {
-
-					//TODO -> Get new members from organization
-					// this.getDBOrganizations();
 					notify({
 						type: 'success',
 						title: "New User Created!",

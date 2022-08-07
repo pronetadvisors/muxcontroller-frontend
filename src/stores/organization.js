@@ -191,6 +191,22 @@ export const useOrganizationStore = defineStore('organization', {
 					});
 				});
 		},
+		completeStream(Stream_ID){
+			Api.post(`/mux/streams/complete/${Stream_ID}`)
+				.then(() => {
+					notify({
+						type: 'success',
+						title: 'Stream Marked as Completed'
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
 		createAsset(data){
 			Api.post(`/mux/assets`, data)
 				.then((res) => {

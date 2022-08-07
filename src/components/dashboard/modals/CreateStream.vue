@@ -29,7 +29,7 @@
               <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Create a new Stream</h3>
               <form class="space-y-6" @submit.prevent="onSubmit">
                 <div>
-                  <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Name</label>
+                  <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Video Title</label>
                   <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                 </div>
                 <div>

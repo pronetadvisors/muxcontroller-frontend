@@ -12,7 +12,7 @@
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-300">
         <tr>
           <th scope="col" class="px-6 py-3">
-            Name
+            Title
           </th>
           <th scope="col" class="px-6 py-3">
             Stream ID
@@ -34,10 +34,10 @@
               {{ stream.name || 'N/A' }}
             </td>
             <td class="px-6 py-4">
-              {{ stream.id}}
+              {{ stream.id }}
             </td>
             <td class="px-6 py-4">
-              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html :playback_id="stream.playback_ids[0].id" /></a>
+              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html type="live" :name="stream.name" :playback_id="stream.playback_ids[0].id" /></a>
             </td>
             <td class="px-6 py-4 flex items-center">
               <div

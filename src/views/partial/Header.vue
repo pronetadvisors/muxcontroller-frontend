@@ -22,7 +22,7 @@
             <font-awesome-icon :icon="['fas', 'film']" class="w-5 h-5" />
             <p class="text-zinc-300">Assets</p>
           </router-link>
-          <router-link to="/dashboard/billing" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
+          <router-link  to="/dashboard/billing" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
             <font-awesome-icon :icon="['fas', 'money-bill']" class="w-5 h-5" />
             <p class="text-zinc-300">Billing</p>
           </router-link>

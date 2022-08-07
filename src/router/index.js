@@ -37,6 +37,22 @@ const routes = [
 			{
 				path: 'assets',
 				component: () => import('@/views/dashboard/Assets.vue')
+			},
+			// {
+			// 	path: 'billing',
+			// 	component: () => import('@/views/dashboard/Billing.vue')
+			// },
+			// {
+			// 	path: 'support',
+			// 	component: () => import('@/views/dashboard/Support.vue')
+			// },
+			{
+				path: 'organization',
+				component: () => import('@/views/dashboard/Organization.vue')
+			},
+			{
+				path: 'NOC4',
+				component: () => import('@/views/dashboard/Noc4.vue')
 			}
 		]
 	},

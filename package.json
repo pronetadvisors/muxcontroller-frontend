@@ -15,6 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@kyvg/vue3-notification": "^2.3.4",
+    "@mux/mux-player": "^0.1.0-beta.26",
     "axios": "^0.27.2",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^1.6.1",
