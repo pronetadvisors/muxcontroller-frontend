@@ -45,7 +45,7 @@
           <div class="flex ml-4 border border-t-0 border-r-0 border-b-0 border-l-1 border-zinc-600">
             <font-awesome-icon :icon="['far', 'bell']" class="hidden sm:flex pt-2 w-7 h-7 text-zinc-300 pl-4 pr-4" />
             <button @click="UserMenu" class="pl-3 sm:pl-0">
-              <img class="h-12 rounded-full" :src="import.meta.env.VITE_IMG_URL + userStore.getAvatar" alt="Avatar">
+              <img class="h-12 rounded-full" :src="img_url + userStore.getAvatar" alt="Avatar">
             </button>
           </div>
         </div>
@@ -67,7 +67,7 @@
       <div class="">
         <div class="rounded absolute flex-col w-60 mt-4 font-bold text-lg bg-zinc-900 right-6 drop-shadow-md text-zinc-300" :class="{'flex': UserIsOpen, 'hidden': !UserIsOpen}">
           <div class="bg-zinc-800 grid grid-rows-3 grid-flow-col gap-1 pt-5 pl-5 max-h-24">
-            <img class="h-14 w-14 rounded-full row-span-3" :src="'http://localhost:3000'+ userStore.getAvatar" alt="Avatar">
+            <img class="h-14 w-14 rounded-full row-span-3" :src="img_url+ userStore.getAvatar" alt="Avatar">
             <p class="font-extralight col-span-2">{{ userStore.getFirstName }} {{ userStore.getLastName }}</p>
             <p class="font-thin text-sm row-span-2 col-span-2">{{ userStore.getOrgName }}</p>
           </div>
@@ -120,6 +120,8 @@ library.add(faTv, faBell, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, 
 
 // MISC
 import { ref } from 'vue';
+
+const img_url = ref(import.meta.env.VITE_IMG_URL || "");
 
 const NavIsOpen = ref(false);
 function NavMenu(){
