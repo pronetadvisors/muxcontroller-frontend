@@ -37,7 +37,7 @@
           <div class="flex ml-4 border border-t-0 border-r-0 border-b-0 border-l-1 border-zinc-600">
             <font-awesome-icon :icon="['far', 'bell']" class="hidden sm:flex pt-2 w-7 h-7 text-zinc-300 pl-4 pr-4" />
             <button @click="UserMenu" class="pl-3 sm:pl-0">
-              <img class="h-12 rounded-full" :src="'http://localhost:3000'+ userStore.getAvatar" alt="Avatar">
+              <img class="h-12 rounded-full" :src="import.meta.env.VITE_IMG_URL + userStore.getAvatar" alt="Avatar">
             </button>
           </div>
         </div>
