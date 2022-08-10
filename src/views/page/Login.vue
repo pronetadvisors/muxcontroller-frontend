@@ -66,7 +66,7 @@ async function onSubmit() {
 		rememberme: rememberme.value,
 	};
 
-	axios.post('http://localhost:3000/api/users/login', user)
+	axios.post(import.meta.env.VITE_API_URL + '/users/login', user)
 		.then(res => {
 			userStore.token = res.data.token;
 			userStore.getUser(true)
@@ -78,7 +78,10 @@ async function onSubmit() {
 				});
 		})
 		.catch(() => {
-			console.log("User and Pass incorrect");
+			notify({
+				type: 'error',
+				title: 'Username and/or Password incorrect'
+			});
 		});
 }
 </script>

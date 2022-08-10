@@ -80,7 +80,7 @@ async function onSubmit() {
 			promotional: promotional.value
 		};
 
-		axios.post('http://localhost:3000/api/users', user)
+		axios.post(import.meta.env.VITE_API_URL + '/api/users', user)
 			.then(res => {
 				userStore.token = res.data.token;
 				userStore.getUser()

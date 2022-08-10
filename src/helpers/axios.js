@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user.js';
 
 const Api = axios.create({
 	//Change back to /api once nginx reverse proxy is up
-	baseURL: 'http://localhost:3000/api',
+	baseURL: import.meta.env.VITE_API_URL,
 	withCredentials: true
 });
 
