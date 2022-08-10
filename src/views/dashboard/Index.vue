@@ -1,7 +1,7 @@
 <template>
  <div class="flex justify-between col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4 mt-10 mb-10">
    <div class="flex">
-     <img class="h-20 rounded-full" :src="'http://localhost:3000'+ userStore.getAvatar" alt="Avatar">
+     <img class="h-20 rounded-full" :src="import.meta.env.VITE_IMG_URL + userStore.getAvatar" alt="Avatar">
      <div class="ml-4 mt-3">
        <p class="text-zinc-200 text-2xl">Welcome back, {{ userStore.getFirstName }} {{ userStore.getLastName }}</p>
 <!--       <p class="text-zinc-200 text-2xl">Welcome back, John Doe</p>-->

@@ -57,7 +57,7 @@
       <div class="">
         <div class="rounded absolute flex-col w-60 mt-4 font-bold text-lg bg-zinc-900 right-6 drop-shadow-md text-zinc-300" :class="{'flex': UserIsOpen, 'hidden': !UserIsOpen}">
           <div class="bg-zinc-800 grid grid-rows-3 grid-flow-col gap-1 pt-5 pl-5 max-h-24">
-            <img class="h-14 w-14 rounded-full row-span-3" :src="'http://localhost:3000'+ userStore.getAvatar" alt="Avatar">
+            <img class="h-14 w-14 rounded-full row-span-3" :src="import.meta.env.VITE_IMG_URL + userStore.getAvatar" alt="Avatar">
             <p class="font-extralight col-span-2">{{ userStore.getFirstName }} {{ userStore.getLastName }}</p>
             <p class="font-thin text-sm row-span-2 col-span-2">Administrator</p>
           </div>
