@@ -97,8 +97,6 @@ date.value = new Date(stream.value.created_at * 1000);
 
 let isOpen = ref(false);
 
-console.log(stream.value.test);
-
 import { notify } from "@kyvg/vue3-notification";
 
 function copy(text) {
