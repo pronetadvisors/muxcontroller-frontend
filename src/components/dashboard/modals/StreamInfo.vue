@@ -22,6 +22,11 @@
         <div class="py-6 px-6 lg:px-8 text-left">
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Stream Info</h3>
           <form class="space-y-6">
+            <div class="flex" v-if="stream.test">
+              <div class="w-full mr-1 text-center">
+                <p class="text-xl font-bold text-orange-600">Test Stream</p>
+              </div>
+            </div>
             <div>
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Name</label>
               <input type="text" disabled v-model="stream.name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -81,10 +86,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faClipboard } from '@fortawesome/free-regular-svg-icons';
 library.add(faCircleInfo, faClipboard);
-
 // PROPS
 const props = defineProps(['stream']);
-
 
 //MISC
 import { ref } from 'vue';
@@ -94,6 +97,7 @@ date.value = new Date(stream.value.created_at * 1000);
 
 let isOpen = ref(false);
 
+console.log(stream.value.test);
 
 import { notify } from "@kyvg/vue3-notification";
 

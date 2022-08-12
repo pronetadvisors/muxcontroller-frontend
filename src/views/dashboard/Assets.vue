@@ -12,13 +12,16 @@
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-300">
         <tr>
           <th scope="col" class="px-6 py-3">
-            Preview
+            Thumbnail
           </th>
           <th scope="col" class="px-6 py-3">
             Asset ID
           </th>
           <th scope="col" class="px-6 py-3">
             HTML
+          </th>
+          <th>
+            Duration
           </th>
           <th scope="col" class="px-6 py-3">
             Status
@@ -30,14 +33,17 @@
         </thead>
         <tbody>
           <tr v-for="asset in organizationStore.getAssets" :key="asset.id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
-            <td class="px-6 py-4">
-              Soon
+            <td class="px-2">
+              <img :src="`https://image.mux.com/${asset.playback_ids[0].id}/thumbnail.png?width=100&height=50&fit_mode=smartcrop`" />
             </td>
             <td class="px-6 py-4">
               {{ asset.id }}
             </td>
             <td class="px-6 py-4">
               <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html type="on-demand" name="Video" :playback_id="asset.playback_ids[0].id" /></a>
+            </td>
+            <td>
+              {{ Math.round(asset.duration * 100) / 100 }}
             </td>
             <td class="px-6 py-4 flex items-center">
               <div

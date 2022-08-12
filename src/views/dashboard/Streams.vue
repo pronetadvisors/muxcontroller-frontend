@@ -31,7 +31,7 @@
         <tbody>
           <tr v-for="stream in organizationStore.getStreams" :key="stream.id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              {{ stream.name || 'N/A' }}
+              {{ stream.name ?? 'N/A' }}
             </td>
             <td class="px-6 py-4">
               {{ stream.id }}

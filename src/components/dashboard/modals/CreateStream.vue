@@ -27,18 +27,20 @@
             </button>
             <div class="py-6 px-6 lg:px-8">
               <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Create a new Stream</h3>
-              <form class="space-y-6" @submit.prevent="onSubmit">
-                <div>
-                  <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Video Title</label>
-                  <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                </div>
-                <div>
-                  <label for="latency" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Latency Mode</label>
-                  <select v-model="latency" name="latency" id="latency" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                    <option value="low">Low</option>
-                    <option value="reduced">Reduced</option>
-                    <option value="standard">Standard</option>
-                  </select>
+              <form class="space-y-2" @submit.prevent="onSubmit">
+                <div class="flex">
+                  <div class="w-1/2 mr-1">
+                    <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Stream Video Title</label>
+                    <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                  </div>
+                  <div class="w-1/2 ml-1">
+                    <label for="latency" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Latency Mode</label>
+                    <select v-model="latency" name="latency" id="latency" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                      <option value="low">Low</option>
+                      <option value="reduced">Reduced</option>
+                      <option value="standard">Standard</option>
+                    </select>
+                  </div>
                 </div>
                 <div>
                   <label for="duration" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Max Duration in Seconds (Default: 12 Hours)</label>
@@ -56,6 +58,36 @@
                 <div>
                   <input v-model="audio" type="checkbox" id="audio" name="audio" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
                   <label for="audio" class="text-sm font-medium text-gray-900 dark:text-gray-300">Audio Only</label>
+                </div>
+                <div>
+                  <input v-model="mp4" type="checkbox" id="audio" name="audio" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
+                  <label for="audio" class="text-sm font-medium text-gray-900 dark:text-gray-300">MP4 Support</label>
+                </div>
+                <div>
+                  <input v-model="cc" type="checkbox" id="audio" name="audio" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
+                  <label for="audio" class="text-sm font-medium text-gray-900 dark:text-gray-300">Closed Captioning</label>
+                </div>
+                <div v-if="cc">
+                  <div class="flex">
+                    <div class="w-1/2 mr-1">
+                      <label for="cc_name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">CC Name</label>
+                      <input type="text" v-model="cc_name" name="cc_name" id="cc_name" placeholder="--" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-1 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    <div class="w-1/2 ml-1">
+                      <label for="cc_passthrough" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">CC Passthrough</label>
+                      <input type="text" v-model="cc_passthrough" name="cc_passthrough" id="cc_passthrough" placeholder="--" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-1 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                  </div>
+                  <div class="flex mt-2">
+                    <div class="w-1/2 mr-1">
+                      <label for="cc_language_code" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Langauge Code</label>
+                      <input type="text" v-model="cc_language_code" name="cc_language_code" id="cc_language_code" placeholder="--" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-1 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    <div class="w-1/2 ml-1">
+                      <label for="cc_language_channel" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Language Channel</label>
+                      <input type="text" v-model="cc_language_channel" name="cc_language_channel" id="cc_language_channel" placeholder="--" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-1 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <input v-model="test" type="checkbox" id="test" name="test" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
@@ -80,6 +112,15 @@ const latency = ref('standard');
 const duration = ref(43200);
 const reconnect = ref(60);
 const slate = ref(false);
+
+const mp4 = ref(true);
+
+const cc = ref(false);
+const cc_name = ref('English CC');
+const cc_passthrough = ref('English closed captions');
+const cc_language_code = ref('en-US');
+const cc_language_channel = ref('cc1');
+
 const audio = ref(false);
 const test = ref(false);
 
@@ -104,6 +145,21 @@ async function onSubmit() {
 			"use_slate_for_standard_latency": slate.value
 		}
 	};
+
+	if(mp4.value){
+		stream.data["new_asset_settings"]["mp4_support"] = "standard";
+	}
+
+	if(cc.value){
+		stream.data["embedded_subtitles"] = [
+			{
+				"name": cc_name.value,
+				"passthrough": cc_passthrough.value,
+				"language_code": cc_language_code.value,
+				"language_channel" : cc_language_channel.value
+			}
+		];
+	}
 
 	await organizationStore.createStream(stream);
 
