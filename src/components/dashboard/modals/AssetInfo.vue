@@ -58,6 +58,26 @@
                 </tbody>
               </table>
             </div>
+            <div class="flex" v-if="asset.mp4_support === 'standard'">
+              <div class="w-1/2 text-center">
+                <p class="text-white text-2xl">MP4: Standard</p>
+              </div>
+              <div class="w-1/2 text-center pt-2" v-if="asset.static_renditions.status == 'ready'">
+                <a :href="`https://stream.mux.com/${asset.playback_ids[0].id}/high.mp4`" download="high.mp4" target="_blank" class="text-white bg-gray-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-400 dark:hover:bg-blue-500 dark:focus:ring-blue-800">Download MP4</a>
+              </div>
+              <div class="w-1/2 text-center" v-else>
+                <p class="text-white text-xl">Preparing...</p>
+                <p>Please refresh the page.</p>
+              </div>
+            </div>
+            <div class="flex" v-else>
+              <div class="w-1/2 text-center">
+                <p class="text-white text-2xl">No MP4 Support</p>
+              </div>
+              <div class="w-1/2 text-center">
+                <button type="button" @click="enableMP4(asset.id)" class="text-white bg-gray-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-400 dark:hover:bg-blue-500 dark:focus:ring-blue-800">Enable MP4</button>
+              </div>
+            </div>
             <div class="text-center">
               <button type="button" @click="isOpen = false" class="w-1/3 text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-400 dark:hover:bg-gray-500 dark:focus:ring-gray-800">Close</button>
             </div>
@@ -84,11 +104,17 @@ let asset = ref(props.asset);
 let date = ref(null);
 date.value = new Date(asset.value.created_at * 1000);
 
+if(asset.value.static_renditions){
+	console.log(asset.value.static_renditions.status);
+}
+
 let isOpen = ref(false);
 
 // STORES
 import { useOrganizationStore } from '@/stores/organization.js';
 const organizationStore = useOrganizationStore();
+
+organizationStore.getAssetsSelf();
 
 import { notify } from "@kyvg/vue3-notification";
 
@@ -100,5 +126,8 @@ function copy(text) {
 	});
 }
 
+function enableMP4(AssetID) {
+	organizationStore.enableMP4Asset(AssetID);
+}
 
 </script>

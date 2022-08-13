@@ -240,6 +240,23 @@ export const useOrganizationStore = defineStore('organization', {
 						text: err.response.data.msg
 					});
 				});
+		},
+		enableMP4Asset(Asset_ID){
+			Api.post(`/mux/assets/${Asset_ID}/mp4support`)
+				.then(() => {
+					this.getAssetsSelf();
+					notify({
+						type: 'success',
+						title: 'Asset MP4 Enabled'
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
 		}
 	},
 });

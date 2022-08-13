@@ -34,7 +34,8 @@
         <tbody>
           <tr v-for="asset in organizationStore.getAssets" :key="asset.id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
             <td class="px-2">
-              <img :src="`https://image.mux.com/${asset.playback_ids[0].id}/thumbnail.png?width=100&height=50&fit_mode=smartcrop`" />
+              <img v-if="asset.status === 'ready'" :src="`https://image.mux.com/${asset.playback_ids[0].id}/thumbnail.png?width=100&height=50&fit_mode=smartcrop`" />
+              <p v-else>Preparing...</p>
             </td>
             <td class="px-6 py-4">
               {{ asset.id }}
@@ -43,7 +44,8 @@
               <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html type="on-demand" name="Video" :playback_id="asset.playback_ids[0].id" /></a>
             </td>
             <td>
-              {{ Math.round(asset.duration * 100) / 100 }}
+              <span v-if="asset.status === 'ready'">{{ Math.round(asset.duration * 100) / 100 }}</span>
+              <p v-else>Preparing...</p>
             </td>
             <td class="px-6 py-4 flex items-center">
               <div
