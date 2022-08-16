@@ -44,7 +44,7 @@
               <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html type="on-demand" name="Video" :playback_id="asset.playback_ids[0].id" /></a>
             </td>
             <td>
-              <span v-if="asset.status === 'ready'">{{ Math.round(asset.duration * 100) / 100 }}</span>
+              <span v-if="asset.status === 'ready'">{{ new Date(Math.round(asset.duration) * 1000).toISOString().slice(11, 19) }}</span>
               <p v-else>Preparing...</p>
             </td>
             <td class="px-6 py-4 flex items-center">
