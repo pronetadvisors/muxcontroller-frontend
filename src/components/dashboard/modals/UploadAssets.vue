@@ -134,7 +134,7 @@ const handleCSVUpload = async() => {
 };
 
 const handleMP4sUpload = async() => {
-	allLinked.value = false;
+	allLinked.value = true;
 	content.value.forEach(line => {
 		line[5] = 'Pending';
 	});
@@ -197,11 +197,15 @@ async function onSubmit() {
 				"cors_origin": "https://con.noc4.co",
 				"new_asset_settings": {
 					"playback_policy": "public",
-					"mp4_support": mp4_support.value,
 					"normalize_audio": audio.value,
 				},
 			}
 		};
+
+		if(mp4_support.value){
+			data.data["new_asset_settings"]["mp4_support"] = "standard";
+		}
+
 		let video = null;
 		for (var i = 0; i < mp4s.value.files.length; i++) {
 			if(mp4s.value.files[i].name === line[0]) {

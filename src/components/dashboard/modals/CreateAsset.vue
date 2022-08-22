@@ -77,10 +77,13 @@ async function onSubmit() {
 			],
 			"playback_policy": ["public"],
 			"normalize_audio": audio.value,
-			"mp4_support": mp4.value,
 			"test": test.value,
 		}
 	};
+
+	if(mp4.value){
+		asset.data["mp4_support"] = "standard";
+	}
 
 	await organizationStore.createAsset(asset);
 

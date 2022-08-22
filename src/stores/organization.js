@@ -262,34 +262,38 @@ export const useOrganizationStore = defineStore('organization', {
 		directUpload(data, video){
 			Api.post(`/mux/upload`, data)
 				.then((res) => {
-					const upload = UpChunk.createUpload({
-						endpoint: res.data,
-						file: video,
-						chunkSize: 30720, // Uploads the file in ~30 MB chunks
-					});
-
-					// subscribe to events
-					upload.on('error', err => {
-						notify({
-							type: 'error',
-							title: `Error:`,
-							text: err.detail
+					try {
+						const upload = UpChunk.createUpload({
+							endpoint: res.data,
+							file: video,
+							chunkSize: 30720, // Uploads the file in ~30 MB chunks
 						});
-					});
 
-					upload.on('progress', progress => {
-						notify({
-							title: `Progress Update:`,
-							text: `So far we've uploaded ${progress.detail}% of this file.`
+						// subscribe to events
+						upload.on('error', err => {
+							notify({
+								type: 'error',
+								title: `Error:`,
+								text: err.detail
+							});
 						});
-					});
 
-					upload.on('success', () => {
-						notify({
-							type: 'success',
-							title: 'Video Uploaded Successfully'
+						upload.on('progress', progress => {
+							notify({
+								title: `Progress Update:`,
+								text: `So far we've uploaded ${Math.round(progress.detail)}% of this file.`
+							});
 						});
-					});
+
+						upload.on('success', () => {
+							notify({
+								type: 'success',
+								title: 'Video Uploaded Successfully'
+							});
+						});
+					} catch (error) {
+						console.log(`😱 Creating authenticated upload url failed: ${error}`);
+					}
 				})
 				.catch((err) => {
 					notify({
