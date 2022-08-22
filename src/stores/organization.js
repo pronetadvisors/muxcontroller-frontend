@@ -285,7 +285,7 @@ export const useOrganizationStore = defineStore('organization', {
 						});
 
 						upload.on('success', () => {
-							Api.get(`/mux/upload/${res.data.id}/update`)
+							Api.get(`/mux/upload/${res.data.id}`)
 								.then(() => {
 									this.getAssetsSelf();
 									notify({
