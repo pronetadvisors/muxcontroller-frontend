@@ -264,12 +264,11 @@ export const useOrganizationStore = defineStore('organization', {
 				.then((res) => {
 					try {
 						const upload = UpChunk.createUpload({
-							endpoint: res.data,
+							endpoint: res.data.url,
 							file: video,
 							chunkSize: 30720, // Uploads the file in ~30 MB chunks
 						});
 
-						// subscribe to events
 						upload.on('error', err => {
 							notify({
 								type: 'error',
@@ -286,10 +285,21 @@ export const useOrganizationStore = defineStore('organization', {
 						});
 
 						upload.on('success', () => {
-							notify({
-								type: 'success',
-								title: 'Video Uploaded Successfully'
-							});
+							Api.get(`/mux/upload/${res.data.id}/update`)
+								.then(() => {
+									this.getAssetsSelf();
+									notify({
+										type: 'success',
+										title: 'Video Uploaded Successfully'
+									});
+								})
+								.catch((err) => {
+									notify({
+										type: 'error',
+										title: `Error ${err.response.status}:`,
+										text: err.response.data.msg
+									});
+								});
 						});
 					} catch (error) {
 						console.log(`😱 Creating authenticated upload url failed: ${error}`);

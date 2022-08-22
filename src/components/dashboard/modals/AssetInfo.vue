@@ -104,10 +104,6 @@ let asset = ref(props.asset);
 let date = ref(null);
 date.value = new Date(asset.value.created_at * 1000);
 
-if(asset.value.static_renditions){
-	console.log(asset.value.static_renditions.status);
-}
-
 let isOpen = ref(false);
 
 // STORES
