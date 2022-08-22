@@ -158,6 +158,19 @@ export const useOrganizationStore = defineStore('organization', {
 					});
 				});
 		},
+		getUsersSelf(){
+			Api.get(`/usersSelf`)
+				.then((res) => {
+					this.users = res.data.users;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
 		createStream(data){
 			Api.post(`/mux/streams`, data)
 				.then((res) => {
@@ -266,7 +279,7 @@ export const useOrganizationStore = defineStore('organization', {
 						const upload = UpChunk.createUpload({
 							endpoint: res.data.url,
 							file: video,
-							chunkSize: 30720, // Uploads the file in ~30 MB chunks
+							chunkSize: 512000, // Uploads the file in ~30 MB chunks
 						});
 
 						upload.on('error', err => {
@@ -292,6 +305,7 @@ export const useOrganizationStore = defineStore('organization', {
 										type: 'success',
 										title: 'Video Uploaded Successfully'
 									});
+
 								})
 								.catch((err) => {
 									notify({

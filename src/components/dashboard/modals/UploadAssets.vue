@@ -194,6 +194,7 @@ async function onSubmit() {
 		let data = {
 			name: line[1],
 			data: {
+				"timeout": 604800,
 				"cors_origin": "https://con.noc4.co",
 				"new_asset_settings": {
 					"playback_policy": "public",
