@@ -2,8 +2,9 @@
   <div class="flex justify-between col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4 mt-10">
     <div class="flex">
     </div>
-    <div class="flex mt-4">
+    <div class="flex mt-4 w-50">
       <create-asset />
+      <upload-asset />
     </div>
   </div>
   <div class="col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4">
@@ -13,6 +14,9 @@
         <tr>
           <th scope="col" class="px-6 py-3">
             Thumbnail
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Title
           </th>
           <th scope="col" class="px-6 py-3">
             Asset ID
@@ -36,6 +40,9 @@
             <td class="px-2">
               <img v-if="asset.status === 'ready'" :src="`https://image.mux.com/${asset.playback_ids[0].id}/thumbnail.png?width=100&height=50&fit_mode=smartcrop`" />
               <p v-else>Preparing...</p>
+            </td>
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              {{ asset.name ?? 'N/A' }}
             </td>
             <td class="px-6 py-4">
               {{ asset.id }}
@@ -80,6 +87,7 @@ organizationStore.getAssetsSelf();
 // COMPONENTS
 import CreateAsset from '@/components/dashboard/modals/CreateAsset.vue';
 import DeleteAsset from '@/components/dashboard/modals/DeleteAsset.vue';
+import UploadAsset from '@/components/dashboard/modals/UploadAssets.vue';
 import AssetInfo from '@/components/dashboard/modals/AssetInfo.vue';
 import CopyHtml from '@/components/dashboard/modals/CopyHTML.vue';
 </script>

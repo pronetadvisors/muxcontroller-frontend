@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src",
@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@kyvg/vue3-notification": "^2.3.4",
     "@mux/mux-player": "^0.1.0-beta.26",
+    "@mux/upchunk": "^2.6.0",
     "axios": "^0.27.2",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^1.6.1",
@@ -31,6 +32,7 @@
     "autoprefixer": "^10.4.7",
     "eslint": "^8.16.0",
     "eslint-plugin-vue": "^9.0.1",
+    "papaparse": "^5.3.2",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24",
     "vite": "^2.9.9"

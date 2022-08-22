@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { Api } from "../helpers/axios";
 import { notify } from "@kyvg/vue3-notification";
+import * as UpChunk from '@mux/upchunk';
 
 export const useOrganizationStore = defineStore('organization', {
 	state: () => ({
@@ -257,6 +258,46 @@ export const useOrganizationStore = defineStore('organization', {
 						text: err.response.data.msg
 					});
 				});
-		}
+		},
+		directUpload(data, video){
+			Api.post(`/mux/upload`, data)
+				.then((res) => {
+					const upload = UpChunk.createUpload({
+						endpoint: res.data,
+						file: video,
+						chunkSize: 30720, // Uploads the file in ~30 MB chunks
+					});
+
+					// subscribe to events
+					upload.on('error', err => {
+						notify({
+							type: 'error',
+							title: `Error:`,
+							text: err.detail
+						});
+					});
+
+					upload.on('progress', progress => {
+						notify({
+							title: `Progress Update:`,
+							text: `So far we've uploaded ${progress.detail}% of this file.`
+						});
+					});
+
+					upload.on('success', () => {
+						notify({
+							type: 'success',
+							title: 'Video Uploaded Successfully'
+						});
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
 	},
 });

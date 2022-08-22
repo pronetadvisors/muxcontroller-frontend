@@ -1,9 +1,9 @@
 <template>
-  <div class="container mx-auto">
-    <div class="flex justify-center">
+  <div class="w-full mx-auto">
+    <div class="justify-center">
       <button
           @click="isOpen = true"
-          class="text-white font-light bg-emerald-400 hover:bg-emerald-600 focus:ring-4 focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-emerald-400 dark:hover:bg-emerald-500 focus:outline-none hover:shadow-md hover:shadow-emerald-800 transition duration-200"
+          class="w-full text-white font-light bg-emerald-400 hover:bg-emerald-600 focus:ring-4 focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-emerald-400 dark:hover:bg-emerald-500 focus:outline-none hover:shadow-md hover:shadow-emerald-800 transition duration-200"
           type="button"
       >
         + Create Asset
@@ -37,6 +37,10 @@
                   <label for="audio" class="text-sm font-medium text-gray-900 dark:text-gray-300">Normalize Audio</label>
                 </div>
                 <div>
+                  <input v-model="mp4" type="checkbox" id="mp4" name="mp4" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
+                  <label for="mp4" class="text-sm font-medium text-gray-900 dark:text-gray-300">MP4 Support</label>
+                </div>
+                <div>
                   <input v-model="test" type="checkbox" id="test" name="test" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
                   <label for="test" class="text-sm font-medium text-gray-900 dark:text-gray-300">Test Asset</label>
                 </div>
@@ -56,6 +60,7 @@ import { ref } from 'vue';
 let isOpen = ref(false);
 const url = ref('');
 const audio = ref(false);
+const mp4 = ref(true);
 const test = ref(false);
 
 // STORES
@@ -72,6 +77,7 @@ async function onSubmit() {
 			],
 			"playback_policy": ["public"],
 			"normalize_audio": audio.value,
+			"mp4_support": mp4.value,
 			"test": test.value,
 		}
 	};
