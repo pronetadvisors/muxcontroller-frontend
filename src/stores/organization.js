@@ -283,7 +283,7 @@ export const useOrganizationStore = defineStore('organization', {
 						const upload = UpChunk.createUpload({
 							endpoint: res.data.url,
 							file: video,
-							chunkSize: 102400, // Uploads the file in ~30 MB chunks
+							chunkSize: 25600, // Uploads the file in ~30 MB chunks
 						});
 
 						upload.on('error', err => {
