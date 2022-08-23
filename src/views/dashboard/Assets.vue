@@ -68,6 +68,11 @@
           </tr>
         </tbody>
       </table>
+      <button
+        type="button"
+        class="text-white font-light bg-zinc-400 hover:bg-zinc-600 focus:ring-4 focus:ring-zinc-800 font-medium rounded-lg text-sm px-5 py-2.5 mt-4 dark:bg-zinc-700 dark:hover:bg-zinc-800 focus:outline-none hover:shadow-md hover:shadow-zinc-800 transition duration-200"
+        @click="downloadCSV"
+        >Download CSV</button>
     </div>
   </div>
 </template>
@@ -83,6 +88,24 @@ import { useOrganizationStore } from '@/stores/organization.js';
 const organizationStore = useOrganizationStore();
 
 organizationStore.getAssetsSelf();
+
+function downloadCSV(){
+	let csv = 'Asset ID, Asset Name, Stream URL\n';
+	organizationStore.getAssets.forEach((asset) => {
+		csv += (asset.id + ",");
+		csv += (asset.name ?? 'N/A' + ",");
+		csv += (`https://stream.mux.com/${asset.playback_ids[0].id}.m3u8`);
+		csv += "\n";
+	});
+
+	csv.slice(0, -2);
+	// console.log(csv);
+	const anchor = document.createElement('a');
+	anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+	anchor.target = '_blank';
+	anchor.download = 'Assets.csv';
+	anchor.click();
+}
 
 // COMPONENTS
 import CreateAsset from '@/components/dashboard/modals/CreateAsset.vue';

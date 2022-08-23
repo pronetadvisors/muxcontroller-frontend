@@ -275,6 +275,10 @@ export const useOrganizationStore = defineStore('organization', {
 		directUpload(data, video){
 			Api.post(`/mux/upload`, data)
 				.then((res) => {
+					notify({
+						type: 'success',
+						title: 'Direct Upload Link Created Successfully'
+					});
 					try {
 						const upload = UpChunk.createUpload({
 							endpoint: res.data.url,
@@ -291,10 +295,12 @@ export const useOrganizationStore = defineStore('organization', {
 						});
 
 						upload.on('progress', progress => {
-							notify({
-								title: `Progress Update:`,
-								text: `So far we've uploaded ${Math.round(progress.detail)}% of this file.`
-							});
+							if (Math.round(progress.detail) % 5 === 0){
+								notify({
+									title: `Progress Update:`,
+									text: `So far we've uploaded ${Math.round(progress.detail)}% of this file.`
+								});
+							}
 						});
 
 						upload.on('success', () => {

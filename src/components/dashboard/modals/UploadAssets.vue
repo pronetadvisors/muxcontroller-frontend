@@ -213,9 +213,9 @@ async function onSubmit() {
 				video = mp4s.value.files[i];
 			}
 		}
+
 		await organizationStore.directUpload(data, video);
-
-
+		await new Promise(resolve => setTimeout(resolve, 1000));
 	}
 
 	isOpen.value = false;
