@@ -24,23 +24,26 @@
             Created At
           </th>
           <th scope="col" class="px-6 py-3">
-            <span class="sr-only">Edit</span>
+            Actions
           </th>
         </tr>
         </thead>
         <tbody>
           <tr v-for="user in organizationStore.getUsers" :key="user.user_id" class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-600">
-            <th scope="row" class="px-6">
-              <img class="h-20 rounded-full" :src="img_url + user.avatar_src" alt="Avatar">
+            <th scope="row" class="px-6 py-1">
+              <img class="h-8 rounded-full" :src="img_url + user.avatar_src" alt="Avatar">
             </th>
             <th scope="row" class="px-6">
               {{ user.firstname }} {{ user.lastname }}
             </th>
-            <th scope="row" class="px-6">
-              {{ user.firstname }} {{ user.lastname }}
+            <th scope="row" class="">
+              {{ user.email }}
             </th>
             <th scope="row" class="px-6">
-              {{ user.firstname }} {{ user.lastname }}
+              {{ user.createdAt }}
+            </th>
+            <th scope="row" class="px-6">
+              Manage
             </th>
   <!--          <td class="px-6 font-medium text-gray-900 dark:text-white whitespace-nowrap">-->
   <!--            <div v-if="organizationStore.getStreams[org.id]">{{  organizationStore.getStreams[org.id].length || 0 }}</div>-->
@@ -100,6 +103,8 @@ import { useOrganizationStore } from '@/stores/organization.js';
 const organizationStore = useOrganizationStore();
 
 organizationStore.getUsersSelf();
+console.log(organizationStore.getUsers);
+
 </script>
 
 <style scoped>
