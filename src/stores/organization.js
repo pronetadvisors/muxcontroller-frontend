@@ -286,7 +286,18 @@ export const useOrganizationStore = defineStore('organization', {
 							chunkSize: 25600, // Uploads the file in ~30 MB chunks
 						});
 
+						const id = video.name;
+
+						notify({
+							id,
+							title: `Upload Started: ${id}`,
+							text: `This Notification will close when the upload is complete.`,
+							duration: 1000000000
+						});
+
+
 						upload.on('error', err => {
+							notify.close(id);
 							notify({
 								type: 'error',
 								title: `Error:`,
@@ -294,16 +305,17 @@ export const useOrganizationStore = defineStore('organization', {
 							});
 						});
 
-						upload.on('progress', progress => {
-							if (Math.round(progress.detail) % 5 === 0){
-								notify({
-									title: `Progress Update:`,
-									text: `So far we've uploaded ${Math.round(progress.detail)}% of this file.`
-								});
-							}
-						});
+						// upload.on('progress', progress => {
+						// 	if (Math.round(progress.detail) % 5 === 0){
+						// 		notify({
+						// 			title: `Progress Update:`,
+						// 			text: `So far we've uploaded ${Math.round(progress.detail)}% of this file.`
+						// 		});
+						// 	}
+						// });
 
 						upload.on('success', () => {
+							notify.close(id);
 							Api.get(`/mux/upload/${res.data.id}`)
 								.then(() => {
 									this.getAssetsSelf();
