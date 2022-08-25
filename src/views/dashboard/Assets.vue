@@ -93,7 +93,7 @@ function downloadCSV(){
 	let csv = 'Asset ID, Asset Name, Stream URL\n';
 	organizationStore.getAssets.forEach((asset) => {
 		csv += (asset.id + ",");
-		csv += (asset.name ?? 'N/A' + ",");
+		csv += ((asset.name ?? 'N/A') + ",");
 		csv += (`https://stream.mux.com/${asset.playback_ids[0].id}.m3u8`);
 		csv += "\n";
 	});
