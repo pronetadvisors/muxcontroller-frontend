@@ -189,32 +189,43 @@ const downloadAndDelete = async() => {
 // };
 
 async function onSubmit() {
+
+	const assets = organizationStore.getAssets;
+
 	for (const line of content.value) {
-		let data = {
-			name: line[1],
-			data: {
-				"timeout": 604800,
-				"cors_origin": "https://con.noc4.co",
-				"new_asset_settings": {
-					"playback_policy": "public",
-					"normalize_audio": audio.value,
-				},
-			}
-		};
-
-		if(mp4_support.value){
-			data.data["new_asset_settings"]["mp4_support"] = "standard";
-		}
-
-		let video = null;
-		for (var i = 0; i < mp4s.value.files.length; i++) {
-			if(mp4s.value.files[i].name === line[0]) {
-				video = mp4s.value.files[i];
+		let exists = false;
+		for(const asset of assets){
+			if(asset.name){
+				if(asset.name.trim() === line[1].trim()) exists = true;
 			}
 		}
+		if(!exists){
+			let data = {
+				name: line[1].trim(),
+				data: {
+					"timeout": 604800,
+					"cors_origin": "https://con.noc4.co",
+					"new_asset_settings": {
+						"playback_policy": "public",
+						"normalize_audio": audio.value,
+					},
+				}
+			};
 
-		await organizationStore.directUpload(data, video);
-		await new Promise(resolve => setTimeout(resolve, 1500));
+			if(mp4_support.value){
+				data.data["new_asset_settings"]["mp4_support"] = "standard";
+			}
+
+			let video = null;
+			for (var i = 0; i < mp4s.value.files.length; i++) {
+				if(mp4s.value.files[i].name.trim() === line[0].trim()) {
+					video = mp4s.value.files[i];
+				}
+			}
+
+			await organizationStore.directUpload(data, video);
+			await new Promise(resolve => setTimeout(resolve, 1500));
+		}
 	}
 
 	isOpen.value = false;
