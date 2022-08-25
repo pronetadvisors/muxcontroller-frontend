@@ -7,7 +7,7 @@ import Profile from '@/components/global/Profile.vue';
   <div class="flex flex-col h-screen">
     <router-view />
   </div>
-  <notifications position="bottom right" />
+  <notifications position="bottom right" max="25" />
 
 	<profile />
 </template>

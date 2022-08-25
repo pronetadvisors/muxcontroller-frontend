@@ -74,7 +74,6 @@
                   </button>
                 </div>
               </div>
-
               <form v-if="allLinked && mp4s != null" class="space-y-6" @submit.prevent="onSubmit">
                 <div class="mt-4 border-t-2 pt-4">
                   <input v-model="audio" type="checkbox" id="audio" name="audio" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
@@ -215,7 +214,7 @@ async function onSubmit() {
 		}
 
 		await organizationStore.directUpload(data, video);
-		await new Promise(resolve => setTimeout(resolve, 1000));
+		await new Promise(resolve => setTimeout(resolve, 1500));
 	}
 
 	isOpen.value = false;
