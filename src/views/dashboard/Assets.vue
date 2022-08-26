@@ -8,8 +8,8 @@
     </div>
   </div>
   <div class="col-start-2 col-span-6 2xl:col-start-3 2xl:col-span-4">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <div class="overflow-x-auto max-h-[700px]">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-y-auto">
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-300">
         <tr>
           <th scope="col" class="px-6 py-3">
@@ -68,12 +68,12 @@
           </tr>
         </tbody>
       </table>
-      <button
+    </div>
+    <button
         type="button"
         class="text-white font-light bg-zinc-400 hover:bg-zinc-600 focus:ring-4 focus:ring-zinc-800 font-medium rounded-lg text-sm px-5 py-2.5 mt-4 dark:bg-zinc-700 dark:hover:bg-zinc-800 focus:outline-none hover:shadow-md hover:shadow-zinc-800 transition duration-200"
         @click="downloadCSV"
-        >Download CSV</button>
-    </div>
+    >Download CSV</button>
   </div>
 </template>
 
