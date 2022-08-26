@@ -24,6 +24,9 @@
           <th scope="col" class="px-6 py-3">
             HTML
           </th>
+          <th scope="col" class="px-6 py-3">
+            Playback
+          </th>
           <th>
             Duration
           </th>
@@ -49,6 +52,11 @@
             </td>
             <td class="px-6 py-4">
               <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><copy-html type="on-demand" name="Video" :playback_id="asset.playback_ids[0].id" /></a>
+            </td>
+            <td class="px-6 py-4">
+              <button @click="copyPB(asset.playback_ids[0].id)">
+                <font-awesome-icon :icon="['far', 'clipboard']" class="w-6 h-6 mr-3 text-blue-600 transition duration-200 hover:scale-125" />
+              </button>
             </td>
             <td>
               <span v-if="asset.status === 'ready'">{{ new Date(Math.round(asset.duration) * 1000).toISOString().slice(11, 19) }}</span>
@@ -113,6 +121,15 @@ import DeleteAsset from '@/components/dashboard/modals/DeleteAsset.vue';
 import UploadAsset from '@/components/dashboard/modals/UploadAssets.vue';
 import AssetInfo from '@/components/dashboard/modals/AssetInfo.vue';
 import CopyHtml from '@/components/dashboard/modals/CopyHTML.vue';
+import {notify} from "@kyvg/vue3-notification";
+
+function copyPB(text) {
+	navigator.clipboard.writeText(`https://stream.mux.com/${text}.m3u8`);
+	notify({
+		type: 'success',
+		title: `Copied to clipboard`,
+	});
+}
 </script>
 
 <style scoped>
