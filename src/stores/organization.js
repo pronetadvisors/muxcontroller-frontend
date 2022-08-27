@@ -273,77 +273,73 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		directUpload(data, video){
-			Api.post(`/mux/upload`, data)
-				.then((res) => {
-					notify({
-						type: 'success',
-						title: 'Direct Upload Link Created Successfully'
-					});
-					try {
-						const upload = UpChunk.createUpload({
-							endpoint: res.data.url,
-							file: video,
-							chunkSize: 25600, // Uploads the file in ~30 MB chunks
-						});
-
-						const id = video.name;
-
+			return new Promise((resolve, reject) => {
+				Api.post(`/mux/upload`, data)
+					.then((res) => {
 						notify({
-							id,
-							title: `Upload Started: ${id}`,
-							text: `This Notification will close when the upload is complete.`,
-							duration: 1000000000
+							type: 'success',
+							title: 'Direct Upload Link Created Successfully'
 						});
-
-
-						upload.on('error', err => {
-							notify.close(id);
-							notify({
-								type: 'error',
-								title: `Error:`,
-								text: err.detail
+						try {
+							const upload = UpChunk.createUpload({
+								endpoint: res.data.url,
+								file: video,
+								chunkSize: 25600, // Uploads the file in ~30 MB chunks
 							});
-						});
 
-						// upload.on('progress', progress => {
-						// 	if (Math.round(progress.detail) % 5 === 0){
-						// 		notify({
-						// 			title: `Progress Update:`,
-						// 			text: `So far we've uploaded ${Math.round(progress.detail)}% of this file.`
-						// 		});
-						// 	}
-						// });
+							const id = video.name;
 
-						upload.on('success', () => {
-							notify.close(id);
-							Api.get(`/mux/upload/${res.data.id}`)
-								.then(() => {
-									this.getAssetsSelf();
-									notify({
-										type: 'success',
-										title: 'Video Uploaded Successfully'
-									});
+							notify({
+								id,
+								title: `Upload Started: ${id}`,
+								text: `This Notification will close when the upload is complete.`,
+								duration: 1000000000
+							});
 
-								})
-								.catch((err) => {
-									notify({
-										type: 'error',
-										title: `Error ${err.response.status}:`,
-										text: err.response.data.msg
-									});
+
+							upload.on('error', err => {
+								notify.close(id);
+								notify({
+									type: 'error',
+									title: `Error:`,
+									text: err.detail
 								});
+								reject(err);
+							});
+
+							upload.on('success', () => {
+								notify.close(id);
+								Api.get(`/mux/upload/${res.data.id}`)
+									.then(() => {
+										this.getAssetsSelf();
+										notify({
+											type: 'success',
+											title: 'Video Uploaded Successfully'
+										});
+										resolve();
+									})
+									.catch((err) => {
+										notify({
+											type: 'error',
+											title: `Error ${err.response.status}:`,
+											text: err.response.data.msg
+										});
+										reject(err);
+									});
+							});
+						} catch (error) {
+							console.log(`😱 Creating authenticated upload url failed: ${error}`);
+						}
+					})
+					.catch((err) => {
+						notify({
+							type: 'error',
+							title: `Error ${err.response.status}:`,
+							text: err.response.data.msg
 						});
-					} catch (error) {
-						console.log(`😱 Creating authenticated upload url failed: ${error}`);
-					}
-				})
-				.catch((err) => {
-					notify({
-						type: 'error',
-						title: `Error ${err.response.status}:`,
-						text: err.response.data.msg
+						reject(err);
 					});
-				});
+			});
 		},
 	},
 });

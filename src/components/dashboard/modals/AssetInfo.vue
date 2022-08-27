@@ -23,6 +23,10 @@
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Asset Info</h3>
           <form class="space-y-6">
             <div>
+              <label for="AssetName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Asset Name</label>
+              <input type="text" disabled v-model="asset.name" name="AssetName" id="AssetName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="--" required>
+            </div>
+            <div>
               <label for="AssetID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Asset ID</label>
               <input type="text" disabled v-model="asset.id" name="AssetID" id="AssetID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="--" required>
             </div>

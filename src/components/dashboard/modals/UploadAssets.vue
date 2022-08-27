@@ -223,8 +223,11 @@ async function onSubmit() {
 				}
 			}
 
+			// await organizationStore.directUpload(data, video);
+			// await new Promise(resolve => setTimeout(resolve, 1500));
+			//https://stackoverflow.com/questions/40165766/returning-promises-from-vuex-actions
+
 			await organizationStore.directUpload(data, video);
-			await new Promise(resolve => setTimeout(resolve, 1500));
 		}
 	}
 
