@@ -64,8 +64,12 @@
                   <label for="audio" class="text-sm font-medium text-gray-900 dark:text-gray-300">MP4 Support</label>
                 </div>
                 <div>
-                  <input v-model="cc" type="checkbox" id="audio" name="audio" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
-                  <label for="audio" class="text-sm font-medium text-gray-900 dark:text-gray-300">Closed Captioning</label>
+                  <input v-model="subtitles" type="checkbox" id="subtitles" name="subtitles" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
+                  <label for="subtitles" class="text-sm font-medium text-gray-900 dark:text-gray-300">Auto Generated Subtitles(English Only)</label>
+                </div>
+                <div>
+                  <input v-model="cc" type="checkbox" id="cc" name="cc" class="form-check-input h-4 w-4 border border-zinc-600 rounded-sm bg-zinc-800 accent-emerald-400 transition duration-200 mt-1 align-middle bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
+                  <label for="cc" class="text-sm font-medium text-gray-900 dark:text-gray-300">Closed Captioning</label>
                 </div>
                 <div v-if="cc">
                   <div class="flex">
@@ -115,6 +119,8 @@ const slate = ref(false);
 
 const mp4 = ref(true);
 
+const subtitles = ref(true);
+
 const cc = ref(false);
 const cc_name = ref('English CC');
 const cc_passthrough = ref('English closed captions');
@@ -148,6 +154,16 @@ async function onSubmit() {
 
 	if(mp4.value){
 		stream.data["new_asset_settings"]["mp4_support"] = "standard";
+	}
+
+	if(subtitles.value){
+		stream.data["generated_subtitles"] = [
+			{
+				"name": "English CC (auto)",
+				"passthrough": "English closed captions (auto-generated)",
+				"language_code": "en-US",
+			}
+		];
 	}
 
 	if(cc.value){
