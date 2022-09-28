@@ -14,7 +14,6 @@ RUN npm run build
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 # Alter Nginx to receive traffic on 8080 instead. Refer below explaination
-#COPY --from=build-stage /app/deployment/default.conf /etc/nginx/conf.d/default.conf
 # Expose container port 8080
 EXPOSE 80
 
