@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && rm /var/www/dist -r && mv dist/ /var/www/",
+    "build": "vite build",
+    "build-old": "vite build && rm /var/www/dist -r && mv dist/ /var/www/",
     "preview": "vite preview",
     "lint": "eslint src",
-    "lint-fix": "eslint src --fix"
+    "lint-fix": "eslint src --fix",
+    "create-env": "printenv > env"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
