@@ -9,6 +9,9 @@ COPY . .
 
 RUN npm run create-env
 
+RUN ls
+RUN cat .env
+
 RUN npm run build
 
 
