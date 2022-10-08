@@ -17,4 +17,4 @@ Api.interceptors.request.use(
 );
 
 
-export { Api };4;
+export { Api };
