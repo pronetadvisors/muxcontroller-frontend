@@ -16,7 +16,7 @@
             default-hidden-captions
             class="w-full"
         ></mux-player>
-        <div class="m-2 pb-2">
+        <div class="m-2 pb-2 text-white">
           <h1>{{ stream.name ?? "N/A" }}</h1>
         </div>
         <div class="grid grid-cols-3 m-2 pb-2">
