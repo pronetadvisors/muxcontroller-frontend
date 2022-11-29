@@ -10,12 +10,15 @@
             stream-type="live"
             :playback-id="stream.playback_ids[0].id"
             :metadata-video-title="stream.name"
-            metadata-viewer-user-id="Adminsitrator"
+            metadata-viewer-user-id="Administrator"
             primary-color="#34D399"
             muted="true"
             default-hidden-captions
             class="w-full"
         ></mux-player>
+        <div class="m-2 pb-2">
+          <h1>{{ stream.name ?? "N/A" }}</h1>
+        </div>
         <div class="grid grid-cols-3 m-2 pb-2">
           <div class="flex items-center align-content-center justify-center">
             <button @click="copy(stream)" class="rounded-lg px-3 py-1 bg-zinc-600 text-white text-sm font-bold transition ease-in-out delay-100 duration-200 hover:scale-105">Embed Player</button>
