@@ -56,7 +56,7 @@
             </td>
             <td class="px-6 py-0">
               <div class="flex">
-                <img v-for="user in organizationStore.getUsers[org.id]" :key="user.id" class="h-9 w-9 rounded-full bg-zinc-800 border-2 border-zinc-800 -mr-4" :src="'http://localhost:3000'+ user.avatar_src" alt="Avatar">
+                <img v-for="user in organizationStore.getUsers[org.id]" :key="user.id" class="h-9 w-9 rounded-full bg-zinc-800 border-2 border-zinc-800 -mr-4" :src="user.avatar_src" alt="Avatar">
                 <create-user :id="org.id"/>
               </div>
             </td>
