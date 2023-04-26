@@ -23,7 +23,7 @@
             <p class="text-zinc-300">Assets</p>
           </router-link>
             <router-link to="/dashboard/relays" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
-                <font-awesome-icon :icon="['fas', 'foward']" class="w-5 h-5" />
+                <font-awesome-icon :icon="['fas', 'forward']" class="w-5 h-5" />
                 <p class="text-zinc-300">Relays</p>
             </router-link>
           <router-link  to="/dashboard/billing" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
@@ -120,8 +120,8 @@
 // ICONS
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faTv, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, faUserGroup, faGear, faArrowRightFromBracket, faToolbox } from '@fortawesome/free-solid-svg-icons';
-library.add(faTv, faBell, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, faUserGroup, faUser, faGear, faArrowRightFromBracket, faToolbox);
+import { faTv, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, faUserGroup, faGear, faArrowRightFromBracket, faToolbox, faForward } from '@fortawesome/free-solid-svg-icons';
+library.add(faTv, faBell, faChartLine, faVideo, faFilm, faMoneyBill, faHeadset, faUserGroup, faUser, faGear, faArrowRightFromBracket, faToolbox, faForward);
 
 // MISC
 import { ref } from 'vue';
