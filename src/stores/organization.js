@@ -9,6 +9,7 @@ export const useOrganizationStore = defineStore('organization', {
 		users: {},
 		streams: {},
 		assets: {},
+		relays: {},
 	}),
 	persist: true,
 	getters: {
@@ -16,6 +17,7 @@ export const useOrganizationStore = defineStore('organization', {
 		getUsers: state => state.users,
 		getStreams: state => state.streams,
 		getAssets: state => state.assets,
+		getRelays: state => state.relays,
 	},
 	actions: {
 		logout() {
@@ -149,6 +151,53 @@ export const useOrganizationStore = defineStore('organization', {
 			Api.get(`/mux/assets/`)
 				.then((res) => {
 					this.assets = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		getRelaysSelf(){
+			Api.get(`/mux/relays/`)
+				.then((res) => {
+					this.relays = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		deleteRelay(Relay_Name){
+			Api.delete(`/mux/relays/${Relay_Name}`)
+				.then(() => {
+					this.getRelaysSelf();
+					notify({
+						type: 'success',
+						title: 'Relay deleted successfully'
+					});
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		createRelay(data){
+			Api.post(`/mux/relays`, data)
+				.then(() => {
+					this.getRelaysSelf();
+					notify({
+						type: 'success',
+						title: 'Relay created successfully'
+					});
 				})
 				.catch((err) => {
 					notify({

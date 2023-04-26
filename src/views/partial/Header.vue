@@ -22,6 +22,10 @@
             <font-awesome-icon :icon="['fas', 'film']" class="w-5 h-5" />
             <p class="text-zinc-300">Assets</p>
           </router-link>
+            <router-link to="/dashboard/relays" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
+                <font-awesome-icon :icon="['fas', 'foward']" class="w-5 h-5" />
+                <p class="text-zinc-300">Relays</p>
+            </router-link>
           <router-link  to="/dashboard/billing" class="flex flex-col items-center hover:underline hover:decoration-2 hover:decoration-dotted hover:decoration-emerald-500" :exact-active-class="'underline decoration-2 decoration-emerald-500 text-emerald-500'">
             <font-awesome-icon :icon="['fas', 'money-bill']" class="w-5 h-5" />
             <p class="text-zinc-300">Billing</p>
@@ -57,6 +61,7 @@
           <router-link to="/dashboard" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Overview</router-link>
           <router-link to="/dashboard/streams" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Streams</router-link>
           <router-link to="/dashboard/assets" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Assets</router-link>
+          <router-link to="/dashboard/relays" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Relays</router-link>
           <router-link to="/dashboard/billing" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Billing</router-link>
           <router-link to="/dashboard/support" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Support</router-link>
           <router-link to="/dashboard/organization" :exact-active-class="'underline decoration-2 decoration-emerald-500'">Organization</router-link>

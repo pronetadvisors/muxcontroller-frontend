@@ -38,6 +38,10 @@ const routes = [
 				path: 'assets',
 				component: () => import('@/views/dashboard/Assets.vue')
 			},
+			{
+				path: 'relays',
+				component: () => import('@/views/dashboard/Relays.vue')
+			},
 			// {
 			// 	path: 'billing',
 			// 	component: () => import('@/views/dashboard/Billing.vue')
