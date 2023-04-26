@@ -174,7 +174,7 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		deleteRelay(Relay_Name){
-			Api.delete(`/relays/${Relay_Name}`)
+			Api.delete(`/relay/${Relay_Name}`)
 				.then(() => {
 					this.getRelaysSelf();
 					notify({

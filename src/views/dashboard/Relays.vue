@@ -61,7 +61,7 @@ library.add(faMagnifyingGlass, faEllipsisVertical);
 import { useOrganizationStore } from '@/stores/organization.js';
 const organizationStore = useOrganizationStore();
 
-organizationStore.getAssetsSelf();
+organizationStore.getRelaysSelf();
 
 // COMPONENTS
 import CreateRelay from '@/components/dashboard/modals/CreateRelay.vue';
