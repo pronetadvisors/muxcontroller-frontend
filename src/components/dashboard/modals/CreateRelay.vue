@@ -28,22 +28,25 @@
             <div class="py-6 px-6 lg:px-8">
               <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Create a new Relay</h3>
               <form class="space-y-6" @submit.prevent="onSubmit">
+                <div class="flex">
+                  <div class="w-1/2 mr-1">
+                    <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Relay Title</label>
+                    <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                  </div>
+                  <div class="w-1/2 ml-1">
+                    <label for="latency" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Associated Stream</label>
+                    <select v-model="stream_name" name="stream_name" id="stream_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                      <option v-for="stream in organizationStore.getStreams" :key="stream.id" :value="stream.stream_key">{{ stream.name }}</option>
+                    </select>
+                  </div>
+                </div>
                 <div>
                   <label for="url" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the destination URL, ie where the Relay should point to</label>
                   <input type="url" v-model="url" name="url" id="url" placeholder="rtmps://global-live.mux.com:443/app/stream_key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                 </div>
                 <div>
-                    <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Name of Relay:</label>
-                    <input type="text" v-model="name" name="name" id="name" placeholder="Relay 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                </div>
-                <div>
                     <label for="port" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the ingest port: Recommend 1300-1400</label>
                     <input type="text" v-model="port" name="port" id="port" placeholder="1337" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                </div>
-                <div>
-                    This will be where we select the stream key to use from the livestreams. Ie Dropdown
-<!--                    <label for="url" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the destination URL, ie where the Relay should point to</label>-->
-<!--                    <input type="url" v-model="url" name="url" id="url" placeholder="rtmps://global-live.mux.com:443/app/stream_key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>-->
                 </div>
                 <button type="submit" value="submit" class="w-full text-white bg-emerald-500 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-emerald-800">Create Relay</button>
               </form>
@@ -56,13 +59,17 @@
 </template>
 <script setup>
 //MISC
-import { ref } from 'vue';
+import {ref, watch} from 'vue';
 
 let isOpen = ref(false);
 const url = ref('');
 const name = ref('');
 const port = ref('');
 const stream_name = ref('');
+
+watch(stream_name, (newVal) => {
+	url.value = "rtmps://global-live.mux.com:443/app/" + newVal;
+});
 
 // STORES
 import { useOrganizationStore } from '@/stores/organization.js';
