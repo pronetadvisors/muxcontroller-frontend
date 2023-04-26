@@ -164,6 +164,9 @@ export const useOrganizationStore = defineStore('organization', {
 			Api.get(`/relays/`)
 				.then((res) => {
 					this.relays = res.data;
+					this.relays.forEach((relay) => {
+						this.getRelayExpose(relay.name);
+					});
 				})
 				.catch((err) => {
 					notify({
@@ -193,7 +196,11 @@ export const useOrganizationStore = defineStore('organization', {
 		getRelayExpose(Relay_Name){
 			Api.get(`/relay_ep/${Relay_Name}`)
 				.then((res) => {
-					return res.data.ip;
+					this.relays.filter((relay) => {
+						if (relay.name === Relay_Name) {
+							relay.ip = res.data.ip;
+						}
+					});
 				})
 				.catch((err) => {
 					notify({
