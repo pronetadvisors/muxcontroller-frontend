@@ -190,6 +190,18 @@ export const useOrganizationStore = defineStore('organization', {
 					});
 				});
 		},
+		getRelayExpose(Relay_Name){
+			Api.get(`/relay_ep/${Relay_Name}`)
+				.then((res) => {
+					return res.data.ip;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+					});
+				});
+		},
 		createRelay(data){
 			Api.post(`/relay`, data)
 				.then(() => {

@@ -18,6 +18,9 @@
             Linked Stream
           </th>
           <th scope="col" class="px-6 py-3">
+            SRT URL
+          </th>
+          <th scope="col" class="px-6 py-3">
             Destination URL
           </th>
           <th scope="col" class="px-6 py-3">
@@ -31,7 +34,13 @@
               {{ relay.name }}
             </td>
             <td class="px-6 py-4">
-              {{ relay.stream_name ?? 'N/A' }}
+                <div v-for="stream in organizationStore.getStreams" :key="stream.id">
+                  <span v-if="stream.stream_key === relay.stream_name">{{stream.name}}</span>
+                </div>
+            </td>
+            <td class="px-6 py-4">
+              <span v-if="organizationStore.getRelayExpose(relay.name)">srt://{{ organizationStore.getRelayExpose(relay.name) }}:{{ relay.port }}</span>
+              <span v-else>Not done... refresh</span>
             </td>
             <td class="px-6 py-4">
                 <button @click="copy(relay.destination_url)">
