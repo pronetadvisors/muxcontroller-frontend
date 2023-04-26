@@ -39,8 +39,7 @@
                 </div>
             </td>
             <td class="px-6 py-4">
-              <span v-if="organizationStore.getRelayExpose(relay.name)">srt://{{ organizationStore.getRelayExpose(relay.name) }}:{{ relay.port }}</span>
-              <span v-else>Not done... refresh</span>
+              <span>srt://{{ organizationStore.getRelayExpose(relay.name) }}:{{ relay.port }}</span>
             </td>
             <td class="px-6 py-4">
                 <button @click="copy(relay.destination_url)">
