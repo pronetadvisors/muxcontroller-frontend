@@ -161,7 +161,7 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		getRelaysSelf(){
-			Api.get(`/mux/relays/`)
+			Api.get(`/relays/`)
 				.then((res) => {
 					this.relays = res.data;
 				})
@@ -174,7 +174,7 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		deleteRelay(Relay_Name){
-			Api.delete(`/mux/relays/${Relay_Name}`)
+			Api.delete(`/relays/${Relay_Name}`)
 				.then(() => {
 					this.getRelaysSelf();
 					notify({
@@ -191,7 +191,7 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		createRelay(data){
-			Api.post(`/mux/relays`, data)
+			Api.post(`/relay`, data)
 				.then(() => {
 					this.getRelaysSelf();
 					notify({
