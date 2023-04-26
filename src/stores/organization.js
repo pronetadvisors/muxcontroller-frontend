@@ -185,12 +185,8 @@ export const useOrganizationStore = defineStore('organization', {
 						title: 'Relay deleted successfully'
 					});
 				})
-				.catch((err) => {
-					notify({
-						type: 'error',
-						title: `Error ${err.response.status}:`,
-						text: err.response.data.msg
-					});
+				.catch(() => {
+					console.log(Relay_Name +" Still loading probably");
 				});
 		},
 		getRelayExpose(Relay_Name){

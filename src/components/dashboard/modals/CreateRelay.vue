@@ -79,7 +79,7 @@ const organizationStore = useOrganizationStore();
 
 async function onSubmit() {
 	let relay = {
-		name: name.value.toLowerCase(),
+		name: name.value.toLowerCase().replace(" ", "-"),
 		port: port.value,
 		stream_name: stream_name.value,
 		destination_url: url.value
