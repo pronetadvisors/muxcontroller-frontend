@@ -40,7 +40,7 @@
             </td>
             <td class="px-6 py-4">
               <span v-if="relay.ip">srt://{{ relay.ip }}:{{ relay.port }}</span>
-              <span v-else>Still exposing relay... refresh</span>
+              <span v-else>Loading...</span>
             </td>
             <td class="px-6 py-4">
                 <button @click="copy(relay.destination_url)">

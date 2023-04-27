@@ -185,8 +185,12 @@ export const useOrganizationStore = defineStore('organization', {
 						title: 'Relay deleted successfully'
 					});
 				})
-				.catch(() => {
-					console.log(Relay_Name +" Still loading probably");
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
 				});
 		},
 		getRelayExpose(Relay_Name){
@@ -198,11 +202,8 @@ export const useOrganizationStore = defineStore('organization', {
 						}
 					});
 				})
-				.catch((err) => {
-					notify({
-						type: 'error',
-						title: `Error ${err.response.status}:`,
-					});
+				.catch(() => {
+					console.log(Relay_Name +" Still loading probably");
 				});
 		},
 		createRelay(data){
