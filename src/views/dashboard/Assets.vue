@@ -98,11 +98,12 @@ const organizationStore = useOrganizationStore();
 organizationStore.getAssetsSelf();
 
 function downloadCSV(){
-	let csv = 'Asset ID, Asset Name, Stream URL\n';
+	let csv = 'Asset ID, Asset Name, Stream URL, MP4 Download\n';
 	organizationStore.getAssets.forEach((asset) => {
 		csv += (asset.id + ",");
 		csv += ((asset.name ?? 'N/A') + ",");
 		csv += (`https://stream.mux.com/${asset.playback_ids[0].id}.m3u8`);
+		csv += (`https://stream.mux.com/${asset.playback_ids[0].id}.mp4`);
 		csv += "\n";
 	});
 

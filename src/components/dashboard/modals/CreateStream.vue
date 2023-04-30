@@ -141,7 +141,8 @@ async function onSubmit() {
 		data: {
 			"playback_policy": ["public"],
 			"new_asset_settings": {
-				"playback_policy": ["public"]
+				"playback_policy": ["public"],
+				"passthrough":name.value
 			},
 			"audio_only": audio.value,
 			"latency_mode": latency.value,
