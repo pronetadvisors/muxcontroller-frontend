@@ -28,23 +28,25 @@
             <div class="py-6 px-6 lg:px-8">
               <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Create a new Relay</h3>
               <form class="space-y-6" @submit.prevent="onSubmit">
-                <div class="flex">
-                  <div class="w-1/2 mr-1">
-                    <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Relay Title</label>
-                    <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                  </div>
-                  <div class="w-1/2 ml-1">
+                <div>
+                  <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Relay Title (No Special Characters)</label>
+                  <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                </div>
+                <div v-for="key in stream_destinations.length" :key="key">
+                  <div>
+                    <h3>{{key+1}}. Destination</h3>
                     <label for="latency" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Associated Stream</label>
-                    <select v-model="stream_name" name="stream_name" id="stream_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    <select v-model="stream_destinations[key]" name="stream_name" id="stream_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                       <option value="">NA</option>
-                      <option v-for="stream in organizationStore.getStreams" :key="stream.id" :value="stream.stream_key">{{ stream.name }}</option>
+                      <option v-for="stream in organizationStore.getStreams" :key="stream.id" :value="`rtmps://global-live.mux.com:443/app/${stream.stream_key}`">{{ stream.name }}</option>
                     </select>
                   </div>
+                  <div>
+                    <label for="url" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the destination URL, ie where the Relay should point to</label>
+                    <input type="url" v-model="stream_destinations[key]" name="url" id="url" placeholder="rtmps://global-live.mux.com:443/app/stream_key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                  </div>
                 </div>
-                <div>
-                  <label for="url" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the destination URL, ie where the Relay should point to</label>
-                  <input type="url" v-model="url" name="url" id="url" placeholder="rtmps://global-live.mux.com:443/app/stream_key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                </div>
+                <button class="text-green">Add destination</button>
                 <div>
                     <label for="port" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the ingest port: Recommend 1300-1400</label>
                     <input type="text" v-model="port" name="port" id="port" placeholder="1337" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -60,17 +62,15 @@
 </template>
 <script setup>
 //MISC
-import {ref, watch} from 'vue';
+import {ref} from 'vue';
 
 let isOpen = ref(false);
 const url = ref('');
 const name = ref('');
 const port = ref('');
 const stream_name = ref('');
+const stream_destinations = ref([""]);
 
-watch(stream_name, (newVal) => {
-	url.value = "rtmps://global-live.mux.com:443/app/" + newVal;
-});
 
 // STORES
 import { useOrganizationStore } from '@/stores/organization.js';
@@ -78,11 +78,17 @@ const organizationStore = useOrganizationStore();
 
 
 async function onSubmit() {
+	stream_destinations.value.forEach((destination) => {
+		if (destination !== "") {
+			url.value += destination + " ";
+		}
+	});
+	url.value = url.value.trim();
 	let relay = {
 		name: name.value.toLowerCase().replace(" ", "-"),
 		port: port.value,
 		stream_name: stream_name.value,
-		destination_url: url.value
+		destination_urls: url.value
 	};
 
 
