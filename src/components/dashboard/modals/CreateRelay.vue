@@ -32,9 +32,9 @@
                   <label for="name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Relay Title (No Special Characters)</label>
                   <input type="text" v-model="name" name="name" id="name" placeholder="Room 1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                 </div>
-                <div v-for="key in stream_destinations.length" :key="key">
+                <div v-for="(destination, key) in stream_destinations" :key="key">
                   <div>
-                    <h3>{{key+1}}. Destination</h3>
+                    <h3 class="text-white">{{++key}}. Destination</h3>
                     <label for="latency" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Associated Stream</label>
                     <select v-model="stream_destinations[key]" name="stream_name" id="stream_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                       <option value="">NA</option>
@@ -46,7 +46,7 @@
                     <input type="url" v-model="stream_destinations[key]" name="url" id="url" placeholder="rtmps://global-live.mux.com:443/app/stream_key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                   </div>
                 </div>
-                <button class="text-green">Add destination</button>
+                <button class="text-emerald-500 text-xs" type="button" @click="stream_destinations.push('')">Add destination</button>
                 <div>
                     <label for="port" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Enter the ingest port: Recommend 1300-1400</label>
                     <input type="text" v-model="port" name="port" id="port" placeholder="1337" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
