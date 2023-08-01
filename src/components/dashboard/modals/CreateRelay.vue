@@ -36,7 +36,7 @@
                   <div>
                     <h3 class="text-white">{{key+1}}. Destination</h3>
                     <label for="latency" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">Associated Stream</label>
-                    <select v-model="stream_destinations[key]" name="stream_name" id="stream_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    <select v-model="stream_destinations[key]" name="stream_name" id="stream_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                       <option value="">NA</option>
                       <option v-for="stream in organizationStore.getStreams" :key="stream.id" :value="`rtmps://global-live.mux.com:443/app/${stream.stream_key}`">{{ stream.name }}</option>
                     </select>
