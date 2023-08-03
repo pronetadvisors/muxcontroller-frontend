@@ -151,7 +151,7 @@ export const useOrganizationStore = defineStore('organization', {
 		// USED BY USERS
 		getStreamsSelf(){
 			const userStore = useUserStore();
-			if (userStore.user.organization_id === null) return;
+			if (userStore.user.org_id === null) return;
 			Api.get(`/mux/streams/`)
 				.then((res) => {
 					this.streams = res.data;
@@ -166,7 +166,7 @@ export const useOrganizationStore = defineStore('organization', {
 		},
 		getAssetsSelf(){
 			const userStore = useUserStore();
-			if (userStore.user.organization_id === null) return;
+			if (userStore.user.org_id === null) return;
 			Api.get(`/mux/assets/`)
 				.then((res) => {
 					this.assets = res.data;
@@ -181,7 +181,7 @@ export const useOrganizationStore = defineStore('organization', {
 		},
 		getRelaysSelf(){
 			const userStore = useUserStore();
-			if (userStore.user.organization_id === null) return;
+			if (userStore.user.org_id === null) return;
 			Api.get(`/relays/`)
 				.then((res) => {
 					this.relays = res.data;
