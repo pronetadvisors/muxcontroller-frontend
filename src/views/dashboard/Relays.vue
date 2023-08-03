@@ -21,7 +21,7 @@
             SRT URL
           </th>
           <th scope="col" class="px-6 py-3">
-            Destination URL
+            Destination URL(s)
           </th>
           <th scope="col" class="px-6 py-3">
             Port
@@ -44,8 +44,8 @@
               <span>srt://relay.noc4.co:{{relay.port}}</span>
             </td>
             <td class="px-6 py-4">
-                <button @click="copy(relay.destination_url)">
-                    {{ relay.destination_url ?? 'N/A' }}
+                <button @click="copy(relay.destination_urls)">
+                    {{ relay.destination_urls ?? 'N/A' }}
                 </button>
             </td>
             <td class="px-6 py-4">

@@ -84,6 +84,7 @@ export const useOrganizationStore = defineStore('organization', {
 						this.getUsersInOrg(org.id);
 						this.getStreamsInOrg(org.id);
 						this.getAssetsInOrg(org.id);
+						this.getRelaysInOrg(org.id);
 					});
 				})
 				.catch((err) => {
@@ -125,6 +126,19 @@ export const useOrganizationStore = defineStore('organization', {
 			Api.get(`/mux/assets/org/${id}`)
 				.then((res) => {
 					this.assets[id] = res.data;
+				})
+				.catch((err) => {
+					notify({
+						type: 'error',
+						title: `Error ${err.response.status}:`,
+						text: err.response.data.msg
+					});
+				});
+		},
+		getRelaysInOrg(id){
+			Api.get(`/relays/org/${id}`)
+				.then((res) => {
+					this.relays[id] = res.data;
 				})
 				.catch((err) => {
 					notify({
