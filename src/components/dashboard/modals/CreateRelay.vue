@@ -93,6 +93,7 @@ async function onSubmit() {
 
 
 	await organizationStore.createRelay(relay);
+	stream_destinations.value = [""];
 
 	isOpen.value = false;
 }
