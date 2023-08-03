@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Api } from "../helpers/axios";
 import { notify } from "@kyvg/vue3-notification";
 import * as UpChunk from '@mux/upchunk';
+import { useUserStore } from "@/stores/user";
 
 export const useOrganizationStore = defineStore('organization', {
 	state: () => ({
@@ -135,6 +136,8 @@ export const useOrganizationStore = defineStore('organization', {
 		},
 		// USED BY USERS
 		getStreamsSelf(){
+			const userStore = useUserStore();
+			if (userStore.user.organization_id === null) return;
 			Api.get(`/mux/streams/`)
 				.then((res) => {
 					this.streams = res.data;
@@ -148,6 +151,8 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		getAssetsSelf(){
+			const userStore = useUserStore();
+			if (userStore.user.organization_id === null) return;
 			Api.get(`/mux/assets/`)
 				.then((res) => {
 					this.assets = res.data;
@@ -161,6 +166,8 @@ export const useOrganizationStore = defineStore('organization', {
 				});
 		},
 		getRelaysSelf(){
+			const userStore = useUserStore();
+			if (userStore.user.organization_id === null) return;
 			Api.get(`/relays/`)
 				.then((res) => {
 					this.relays = res.data;
